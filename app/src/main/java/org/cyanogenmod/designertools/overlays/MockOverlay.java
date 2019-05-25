@@ -16,6 +16,7 @@
 package org.cyanogenmod.designertools.overlays;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -26,8 +27,10 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.IBinder;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -39,8 +42,11 @@ import org.cyanogenmod.designertools.R;
 import org.cyanogenmod.designertools.qs.MockQuickSettingsTile;
 import org.cyanogenmod.designertools.qs.OnOffTileState;
 import org.cyanogenmod.designertools.utils.MockupUtils;
+import org.cyanogenmod.designertools.utils.NotificationUtils;
 import org.cyanogenmod.designertools.utils.PreferenceUtils;
 import org.cyanogenmod.designertools.utils.PreferenceUtils.MockPreferences;
+
+import androidx.core.app.NotificationCompat;
 
 public class MockOverlay extends Service {
     private static final int NOTIFICATION_ID = MockOverlay.class.hashCode();
@@ -89,7 +95,7 @@ public class MockOverlay extends Service {
         mWindowManager.getDefaultDisplay().getRealSize(size);
         mParams = new WindowManager.LayoutParams(
                 size.x, size.y,
-                WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE |
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
                 WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS |
@@ -127,7 +133,8 @@ public class MockOverlay extends Service {
     private Notification getPersistentNotification(boolean actionIsHide) {
         PendingIntent pi = PendingIntent.getBroadcast(this, 0,
                 new Intent(actionIsHide ? ACTION_HIDE_OVERLAY : ACTION_SHOW_OVERLAY), 0);
-        Notification.Builder builder = new Notification.Builder(this);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
+                NotificationUtils.createNotificationChannel(this, getClass().getSimpleName(), "Mockup overlay"));
         String text = getString(actionIsHide ? R.string.notif_content_hide_mock_overlay
                 : R.string.notif_content_show_mock_overlay);
         builder.setPriority(Notification.PRIORITY_MIN)
@@ -135,7 +142,7 @@ public class MockOverlay extends Service {
                         : R.drawable.ic_qs_overlay_off)
                 .setContentTitle(getString(R.string.mock_qs_tile_label))
                 .setContentText(text)
-                .setStyle(new Notification.BigTextStyle().bigText(text))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
                 .setContentIntent(pi);
         return builder.build();
     }

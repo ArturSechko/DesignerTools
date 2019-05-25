@@ -16,6 +16,7 @@
 package org.cyanogenmod.designertools.overlays;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -25,11 +26,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -38,12 +41,15 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 
 import org.cyanogenmod.designertools.DesignerToolsApplication;
+import org.cyanogenmod.designertools.R;
 import org.cyanogenmod.designertools.qs.GridQuickSettingsTile;
 import org.cyanogenmod.designertools.qs.OnOffTileState;
-import org.cyanogenmod.designertools.R;
 import org.cyanogenmod.designertools.utils.ColorUtils;
+import org.cyanogenmod.designertools.utils.NotificationUtils;
 import org.cyanogenmod.designertools.utils.PreferenceUtils;
 import org.cyanogenmod.designertools.utils.PreferenceUtils.GridPreferences;
+
+import androidx.core.app.NotificationCompat;
 
 public class GridOverlay extends Service {
     private static final int NOTIFICATION_ID = GridOverlay.class.hashCode();
@@ -89,9 +95,9 @@ public class GridOverlay extends Service {
     private void setup() {
         mParams = new WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE |
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, PixelFormat.TRANSLUCENT);
         mOverlayView = new GridOverlayView(this);
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         mWindowManager.addView(mOverlayView, mParams);
@@ -126,7 +132,8 @@ public class GridOverlay extends Service {
     private Notification getPersistentNotification(boolean actionIsHide) {
         PendingIntent pi = PendingIntent.getBroadcast(this, 0,
                 new Intent(actionIsHide ? ACTION_HIDE_OVERLAY : ACTION_SHOW_OVERLAY), 0);
-        Notification.Builder builder = new Notification.Builder(this);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
+                NotificationUtils.createNotificationChannel(this, getClass().getSimpleName(), "Grid overlay"));
         String text = getString(actionIsHide ? R.string.notif_content_hide_grid_overlay
                 : R.string.notif_content_show_grid_overlay);
         builder.setPriority(Notification.PRIORITY_MIN)
@@ -134,7 +141,7 @@ public class GridOverlay extends Service {
                         : R.drawable.ic_qs_grid_off)
                 .setContentTitle(getString(R.string.grid_qs_tile_label))
                 .setContentText(text)
-                .setStyle(new Notification.BigTextStyle().bigText(text))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
                 .setContentIntent(pi);
         return builder.build();
     }
@@ -271,7 +278,7 @@ public class GridOverlay extends Service {
             mFirstKeylineMarkerBounds = new Rect(x, y, x + width, y + height);
             x = (int) (72 * dm.density);
             mSecondKeylineMarkerBounds = new Rect(x, y, x + width, y + height);
-            x = dm.widthPixels - (int)(16 * dm.density);
+            x = dm.widthPixels - (int) (16 * dm.density);
             mThirdKeylineMarkerBounds = new Rect(x, y, x + width, y + height);
 
             mFirstKeylineRect = new RectF(0, 0, 16 * dm.density, dm.heightPixels);
@@ -299,7 +306,7 @@ public class GridOverlay extends Service {
 
                     @Override
                     public void onSharedPreferenceChanged(SharedPreferences prefs,
-                            String key) {
+                                                          String key) {
                         if (GridPreferences.KEY_SHOW_GRID.equals(key)) {
                             boolean enabled =
                                     prefs.getBoolean(GridPreferences.KEY_SHOW_GRID, false);

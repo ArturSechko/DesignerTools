@@ -20,8 +20,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.ContextThemeWrapper;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,6 +31,9 @@ import org.cyanogenmod.designertools.utils.PreferenceUtils.GridPreferences;
 import com.larswerkman.lobsterpicker.LobsterPicker;
 import com.larswerkman.lobsterpicker.sliders.LobsterOpacitySlider;
 import com.viewpagerindicator.CirclePageIndicator;
+
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 public class DualColorPickerDialog extends DialogFragment {
     private ColorPickerViewHolder[] mColorPickerViews;

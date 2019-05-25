@@ -30,10 +30,13 @@ import android.util.Log;
 
 import org.cyanogenmod.designertools.R;
 import org.cyanogenmod.designertools.ui.DesignerToolsActivity;
+import org.cyanogenmod.designertools.utils.NotificationUtils;
 import org.cyanogenmod.designertools.utils.PreferenceUtils;
 import org.cyanogenmod.designertools.utils.PreferenceUtils.ScreenshotPreferences;
 
 import java.io.File;
+
+import androidx.core.app.NotificationCompat;
 
 public class ScreenshotListenerService extends Service
         implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -85,13 +88,14 @@ public class ScreenshotListenerService extends Service
     private Notification getPersistentNotification() {
         PendingIntent pi = PendingIntent.getActivity(this, 0,
                 new Intent(this, DesignerToolsActivity.class), 0);
-        Notification.Builder builder = new Notification.Builder(this);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
+                NotificationUtils.createNotificationChannel(this, getClass().getSimpleName(), "Screenshot info"));
         String text = getString(R.string.notif_content_screenshot_info);
         builder.setPriority(Notification.PRIORITY_MIN)
                 .setSmallIcon(R.drawable.ic_qs_screenshotinfo_on)
                 .setContentTitle(getString(R.string.screenshot_qs_tile_label))
                 .setContentText(text)
-                .setStyle(new Notification.BigTextStyle().bigText(text))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
                 .setContentIntent(pi);
         return builder.build();
     }

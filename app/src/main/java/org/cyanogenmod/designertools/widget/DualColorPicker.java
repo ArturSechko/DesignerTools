@@ -8,7 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Region;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -23,6 +23,8 @@ public class DualColorPicker extends View {
     private Paint mSecondaryFillPaint;
     private Paint mPrimaryStrokePaint;
     private Paint mSecondaryStrokePaint;
+    private RectF leftHalfOval;
+    private RectF rightHalfOval;
 
     public DualColorPicker(Context context) {
         this(context, null);
@@ -55,38 +57,45 @@ public class DualColorPicker extends View {
         mPrimaryStrokePaint.setColor(getDarkenedColor(primaryColor));
 
         mSecondaryFillPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
-        mSecondaryFillPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        mSecondaryFillPaint.setStyle(Paint.Style.FILL);
         mSecondaryFillPaint.setColor(secondaryColor);
         mSecondaryStrokePaint = new Paint(mSecondaryFillPaint);
         mSecondaryStrokePaint.setStyle(Paint.Style.STROKE);
         mSecondaryStrokePaint.setStrokeWidth(STROKE_WIDTH);
         mSecondaryStrokePaint.setColor(getDarkenedColor(secondaryColor));
+
+        leftHalfOval = new RectF();
+        rightHalfOval = new RectF();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         final float width = getWidth();
         final float height = getHeight();
-        final float widthDiv2 = width / 2f;
-        final float heightDiv2 = height / 2f;
-        final float radius = Math.min(widthDiv2, heightDiv2) * 0.9f;
+        final float centerX = width / 2f;
+        final float centerY = height / 2f;
+        final float radius = Math.min(centerX, centerY) * 0.9f;
 
         // erase everything
         canvas.drawColor(0);
 
         // draw the left half
-        canvas.clipRect(0, 0, widthDiv2, height, Region.Op.REPLACE);
-        canvas.drawCircle(widthDiv2, heightDiv2, radius, mPrimaryFillPaint);
-        canvas.drawCircle(widthDiv2, heightDiv2, radius, mPrimaryStrokePaint);
-        canvas.drawLine(widthDiv2 - STROKE_WIDTH / 2f, heightDiv2 - radius,
-                widthDiv2 - STROKE_WIDTH / 2f, heightDiv2 + radius, mPrimaryStrokePaint);
+        leftHalfOval.set(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
+        leftHalfOval.offset(-radius * 0.05f, 0);
+        canvas.drawArc(leftHalfOval, 90, 180, true, mPrimaryFillPaint);
+        leftHalfOval.inset(STROKE_WIDTH / 2, STROKE_WIDTH / 2);
+        canvas.drawArc(leftHalfOval, 90, 180, false, mPrimaryStrokePaint);
+        canvas.drawLine(centerX - STROKE_WIDTH, centerY - radius + STROKE_WIDTH,
+                centerX - STROKE_WIDTH, centerY + radius - STROKE_WIDTH, mPrimaryStrokePaint);
 
-        /// draw the right half
-        canvas.clipRect(widthDiv2, 0, width, height, Region.Op.REPLACE);
-        canvas.drawCircle(widthDiv2, heightDiv2, radius, mSecondaryFillPaint);
-        canvas.drawCircle(widthDiv2, heightDiv2, radius, mSecondaryStrokePaint);
-        canvas.drawLine(widthDiv2 + STROKE_WIDTH / 2f, heightDiv2 - radius,
-                widthDiv2 + STROKE_WIDTH / 2f, heightDiv2 + radius, mSecondaryStrokePaint);
+        // draw the right half
+        rightHalfOval.set(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
+        leftHalfOval.offset(radius * 0.05f, 0);
+        canvas.drawArc(rightHalfOval, 270, 180, true, mSecondaryFillPaint);
+        rightHalfOval.inset(STROKE_WIDTH / 2, STROKE_WIDTH / 2);
+        canvas.drawArc(rightHalfOval, 270, 180, false, mSecondaryStrokePaint);
+        canvas.drawLine(centerX + STROKE_WIDTH / 2f, centerY - radius + STROKE_WIDTH,
+                centerX + STROKE_WIDTH / 2f, centerY + radius - STROKE_WIDTH, mSecondaryStrokePaint);
     }
 
     private int getDarkenedColor(int color) {

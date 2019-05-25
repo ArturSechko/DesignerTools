@@ -42,23 +42,25 @@ import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
 
 import org.cyanogenmod.designertools.DesignerToolsApplication;
 import org.cyanogenmod.designertools.qs.ColorPickerQuickSettingsTile;
 import org.cyanogenmod.designertools.qs.OnOffTileState;
 import org.cyanogenmod.designertools.R;
+import org.cyanogenmod.designertools.utils.NotificationUtils;
 import org.cyanogenmod.designertools.widget.MagnifierNodeView;
 import org.cyanogenmod.designertools.widget.MagnifierView;
 
 import java.nio.ByteBuffer;
+
+import androidx.core.app.NotificationCompat;
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 public class ColorPickerOverlay extends Service {
     private static final int NOTIFICATION_ID = ColorPickerOverlay.class.hashCode();
@@ -165,14 +167,14 @@ public class ColorPickerOverlay extends Service {
 
         mNodeParams = new WindowManager.LayoutParams(
                 nodeViewSize, nodeViewSize,
-                WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
                         WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS |
                         WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, PixelFormat.TRANSLUCENT);
         mNodeParams.gravity = Gravity.TOP | Gravity.LEFT;
         mMagnifierParams = new WindowManager.LayoutParams(
                 magnifierWidth, magnifierHeight,
-                WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
                         WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS |
                         WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, PixelFormat.TRANSLUCENT);
@@ -427,14 +429,15 @@ public class ColorPickerOverlay extends Service {
     private Notification getPersistentNotification(boolean actionIsHide) {
         PendingIntent pi = PendingIntent.getBroadcast(this, 0,
                 new Intent(actionIsHide ? ACTION_HIDE_PICKER : ACTION_SHOW_PICKER), 0);
-        Notification.Builder builder = new Notification.Builder(this);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,
+                NotificationUtils.createNotificationChannel(this, getClass().getSimpleName(), "Color Picker overlay"));
         builder.setPriority(Notification.PRIORITY_MIN)
                 .setSmallIcon(actionIsHide ? R.drawable.ic_qs_colorpicker_on
                         : R.drawable.ic_qs_colorpicker_off)
                 .setContentTitle(getString(R.string.color_picker_qs_tile_label))
                 .setContentText(getString(actionIsHide ? R.string.notif_content_hide_picker
                         : R.string.notif_content_show_picker))
-                .setStyle(new Notification.BigTextStyle().bigText(
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(
                         getString(actionIsHide ? R.string.notif_content_hide_picker
                         : R.string.notif_content_show_picker)))
                 .setContentIntent(pi);
