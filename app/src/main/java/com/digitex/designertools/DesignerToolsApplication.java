@@ -16,7 +16,6 @@ public class DesignerToolsApplication extends Application {
     private boolean mGridOverlayOn;
     private boolean mMockOverlayOn;
     private boolean mColorPickerOn;
-    private boolean mScreenshotOn;
 
     public void setScreenRecordPermissionData(int resultCode, Intent resultData) {
         mResultCode = resultCode;
@@ -53,13 +52,5 @@ public class DesignerToolsApplication extends Application {
 
     public boolean getColorPickerOn() {
         return mColorPickerOn || ColorPickerPreferences.getColorPickerQsTileEnabled(this, false);
-    }
-
-    public void setScreenshotOn(boolean on) {
-        mScreenshotOn = on;
-    }
-
-    public boolean getScreenshotOn() {
-        return mScreenshotOn;
     }
 }
