@@ -46,7 +46,6 @@
     <string name="device_title">Device</string>
     <string name="code_name_title">Code Name</string>
     <string name="build_title">Build</string>
-    <string name="screen_size_title">Screen Size</string>
     <string name="screen_density_title">Screen Density</string>
 
     <string name="notif_content_hide_picker">Press to hide color picker</string>
