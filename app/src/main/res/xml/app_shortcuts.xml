@@ -8,7 +8,7 @@
         <intent
             android:action="com.scheffsblend.designertools.action.SHOW_GRID_OVERLAY"
             android:targetPackage="com.scheffsblend.designertools"
-            android:targetClass="org.cyanogenmod.designertools.ui.AppShortcutsActivity" />
+            android:targetClass="com.digitex.designertools.ui.AppShortcutsActivity" />
     </shortcut>
     <shortcut
         android:shortcutId="mock_overlay"
@@ -18,7 +18,7 @@
         <intent
             android:action="com.scheffsblend.designertools.action.SHOW_MOCK_OVERLAY"
             android:targetPackage="com.scheffsblend.designertools"
-            android:targetClass="org.cyanogenmod.designertools.ui.AppShortcutsActivity" />
+            android:targetClass="com.digitex.designertools.ui.AppShortcutsActivity" />
     </shortcut>
     <shortcut
         android:shortcutId="color_picker"
@@ -28,6 +28,6 @@
         <intent
             android:action="com.scheffsblend.designertools.action.SHOW_COLOR_PICKER_OVERLAY"
             android:targetPackage="com.scheffsblend.designertools"
-            android:targetClass="org.cyanogenmod.designertools.ui.AppShortcutsActivity" />
+            android:targetClass="com.digitex.designertools.ui.AppShortcutsActivity" />
     </shortcut>
 </shortcuts>
