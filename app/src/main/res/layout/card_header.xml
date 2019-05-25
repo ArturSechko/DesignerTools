@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/header_icon"
+        android:layout_width="@dimen/card_header_icon_size"
+        android:layout_height="@dimen/card_header_icon_size"
+        app:layout_constraintBottom_toBottomOf="@+id/header_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/header_title"
+        tools:src="@drawable/ic_qs_grid_on"/>
 
-        <ImageView
-            android:id="@+id/header_icon"
-            android:layout_width="@dimen/card_header_icon_size"
-            android:layout_height="@dimen/card_header_icon_size"
-            android:layout_marginTop="4dp"/>
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/header_title_grid_overlay"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/header_icon"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/header_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="16dp"
-            android:textSize="24sp"
-            android:textColor="?android:attr/textColorPrimary"
-            android:text="@string/header_title_grid_overlay"/>
-
-        <Switch
-            android:id="@+id/enable_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+    <Switch
+        android:id="@+id/enable_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/header_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/header_title"/>
 
     <TextView
         android:id="@+id/header_summary"
@@ -37,8 +40,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:lineSpacingExtra="8sp"
-        android:textColor="?android:attr/textColorPrimary"
         android:text="@string/header_summary_grid_overlay"
-        android:textSize="14sp"/>
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/header_title"/>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,7 +44,7 @@ public class DualColorPicker extends View {
         int primaryColor = ta.getColor(R.styleable.DualColorPicker_primaryColor,
                 GridPreferences.getGridLineColor(context, getResources()
                 .getColor(R.color.dualColorPickerDefaultPrimaryColor)));
-        int secondaryColor = ta.getColor(R.styleable.DualColorPicker_primaryColor,
+        int secondaryColor = ta.getColor(R.styleable.DualColorPicker_secondaryColor,
                 GridPreferences.getKeylineColor(context, getResources()
                 .getColor(R.color.dualColorPickerDefaultSecondaryColor)));
 

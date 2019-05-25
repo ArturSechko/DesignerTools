@@ -51,7 +51,7 @@ public class MockupOverlayCardFragmnt extends DesignerToolCardFragment {
         base.setBackgroundTintList(ColorStateList.valueOf(
                 getResources().getColor(R.color.colorMockupOverlayCardTint)));
 
-        View v =inflater.inflate(R.layout.mockup_overlay_content, mCardContent);
+        View v =inflater.inflate(R.layout.include_mockup_overlay, mCardContent);
         mPortraitImage = (ImageView) v.findViewById(R.id.portrait_image);
         mPortraitImage.setImageBitmap(MockupUtils.getPortraitMockup(getContext()));
         mPortraitImage.setOnClickListener(mImageClickListener);

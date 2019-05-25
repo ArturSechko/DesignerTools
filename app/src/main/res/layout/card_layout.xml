@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/parent_layout"
-    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    android:padding="24dp"
-    android:elevation="2dp"
-    android:clipToPadding="false"
+    android:layout_marginTop="4dp"
     android:background="@drawable/card_background"
-    android:outlineProvider="bounds">
+    android:clipToPadding="false"
+    android:elevation="2dp"
+    android:orientation="vertical"
+    android:outlineProvider="bounds"
+    android:padding="24dp">
 
-    <include layout="@layout/card_header" />
+    <include layout="@layout/card_header"/>
 
     <FrameLayout
         android:id="@+id/card_content"

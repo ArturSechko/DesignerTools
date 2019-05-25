@@ -26,6 +26,7 @@ android {
 
 dependencies {
     implementation("androidx.appcompat:appcompat:1.1.0-alpha05")
+    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     implementation("org.cyanogenmod:platform.sdk:6.0")
     implementation("com.larswerkman:lobsterpicker:1.0.1")
     implementation("fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar")

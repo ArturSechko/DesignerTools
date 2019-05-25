@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
+    tools:ignore="ContentDescription">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="8dp"
+        android:text="@string/current_mockup"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/portrait"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"/>
+
+    <ImageView
+        android:id="@+id/portrait_image"
+        android:layout_width="100dp"
+        android:layout_height="172dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/pick_mock_overlay_background"
+        android:padding="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"/>
+
+    <TextView
+        android:id="@+id/landscape_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/landscape"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/landscape_image"
+        app:layout_constraintStart_toStartOf="@+id/landscape_image"/>
+
+    <ImageView
+        android:id="@+id/landscape_image"
+        android:layout_width="172dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="28dp"
+        android:background="@drawable/pick_mock_overlay_background"
+        android:padding="2dp"
+        app:layout_constraintStart_toEndOf="@+id/portrait_image"
+        app:layout_constraintTop_toTopOf="@+id/portrait_image"/>
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="@string/reset_mokcups"
+        android:textColor="?android:attr/textColorSecondary"
+        app:layout_constraintBottom_toBottomOf="@+id/portrait_image"
+        app:layout_constraintEnd_toEndOf="@+id/landscape_image"/>
+
+    <TextView
+        android:id="@+id/opacity_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/portrait_image"/>
+
+    <SeekBar
+        android:id="@+id/opacity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:max="8"
+        app:layout_constraintTop_toBottomOf="@+id/opacity_text"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

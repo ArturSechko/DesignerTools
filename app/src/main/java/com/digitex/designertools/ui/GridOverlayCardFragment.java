@@ -46,7 +46,7 @@ public class GridOverlayCardFragment extends DesignerToolCardFragment
         base.setBackgroundTintList(ColorStateList.valueOf(
                 context.getColor(R.color.colorGridOverlayCardTint)));
 
-        View v = inflater.inflate(R.layout.grid_overlay_content, mCardContent, true);
+        View v = inflater.inflate(R.layout.include_grid_overlay, mCardContent, true);
         mIncludeKeylines = (CheckBox) v.findViewById(R.id.include_keylines);
         mIncudeCustomGrid = (CheckBox) v.findViewById(R.id.include_custom_grid_size);
         mColumnSizer = (SeekBar) v.findViewById(R.id.column_sizer);
