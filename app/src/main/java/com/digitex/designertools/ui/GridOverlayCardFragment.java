@@ -54,8 +54,8 @@ public class GridOverlayCardFragment extends DesignerToolCardFragment
         mRowSizer = (SeekBar) v.findViewById(R.id.row_sizer);
         mRowSizer.setProgress((GridPreferences.getGridRowSize(getContext(), 8) - 4) / 2);
         mGridPreview = (GridPreview) v.findViewById(R.id.grid_preview);
-        mGridPreview.setColumnSize(GridPreferences.getGridColumnSize(getContext(), 8));
-        mGridPreview.setRowSize(GridPreferences.getGridRowSize(getContext(), 8));
+        mGridPreview.setColumnSizeDp(GridPreferences.getGridColumnSize(getContext(), 8));
+        mGridPreview.setRowSizeDp(GridPreferences.getGridRowSize(getContext(), 8));
 
         mColumnSizer.setOnSeekBarChangeListener(mSeekBarChangeListener);
         mRowSizer.setOnSeekBarChangeListener(mSeekBarChangeListener);
@@ -143,8 +143,8 @@ public class GridOverlayCardFragment extends DesignerToolCardFragment
             } else if (buttonView == mIncudeCustomGrid){
                 GridPreferences.setUseCustomGridSize(getContext(), isChecked);
                 if (isChecked) {
-                    GridPreferences.setGridColumnSize(getContext(), mGridPreview.getColumnSize());
-                    GridPreferences.setGridRowSize(getContext(), mGridPreview.getRowSize());
+                    GridPreferences.setGridColumnSize(getContext(), mGridPreview.getColumnSizeDp());
+                    GridPreferences.setGridRowSize(getContext(), mGridPreview.getRowSizeDp());
                 }
                 mColumnSizer.setEnabled(isChecked);
                 mRowSizer.setEnabled(isChecked);
@@ -157,10 +157,10 @@ public class GridOverlayCardFragment extends DesignerToolCardFragment
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             int size = 4 + progress * 2;
             if (seekBar == mColumnSizer) {
-                mGridPreview.setColumnSize(size);
+                mGridPreview.setColumnSizeDp(size);
                 GridPreferences.setGridColumnSize(getContext(), size);
             } else if (seekBar == mRowSizer) {
-                mGridPreview.setRowSize(size);
+                mGridPreview.setRowSizeDp(size);
                 GridPreferences.setGridRowSize(getContext(), size);
             }
         }
