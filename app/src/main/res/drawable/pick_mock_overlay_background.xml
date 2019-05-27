@@ -3,7 +3,8 @@
 
     <item android:drawable="@drawable/pick_mockup_frame" />
 
-    <item android:gravity="center"
-        android:drawable="@drawable/ic_add"/>
+    <item
+        android:drawable="@drawable/ic_add"
+        android:gravity="center" />
 
 </layer-list>

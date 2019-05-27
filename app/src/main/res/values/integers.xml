@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <integer name="default_column_size">8</integer>
     <integer name="default_row_size">8</integer>
 
@@ -7,4 +8,5 @@
     <integer name="color_picker_sample_height">@integer/color_picker_sample_width</integer>
 
     <integer name="credits_circular_reveal_duration">750</integer>
+
 </resources>

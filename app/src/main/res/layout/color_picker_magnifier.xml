@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.digitex.designertools.widget.MagnifierView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.digitex.designertools.widget.MagnifierView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/picker_magnifying_ring_width"
     android:layout_height="@dimen/picker_magnifying_ring_height">
 
@@ -13,6 +12,6 @@
         android:background="@drawable/color_hex_backer"
         android:gravity="center"
         android:textColor="#deffffff"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
 </com.digitex.designertools.widget.MagnifierView>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Designer Tools</string>
 
     <string name="header_title_grid_overlay">Grid overlay</string>
@@ -23,7 +24,7 @@
     <string name="include_custom_grid_size">Include custom grid size</string>
 
     <string name="current_mockup">Current mockup:</string>
-    <string name="portrait">Portait</string>
+    <string name="portrait">Portrait</string>
     <string name="landscape">Landscape</string>
     <string name="reset_mokcups">Reset mockups</string>
     <string name="opacity_format">%d %% Opacity</string>

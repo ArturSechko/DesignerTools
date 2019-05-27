@@ -9,6 +9,6 @@
 
     <item
         android:drawable="@drawable/ic_qs_overlay_on"
-        android:gravity="center"/>
+        android:gravity="center" />
 
 </layer-list>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,7 +16,7 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.digitex.designertools.widget.DualColorPicker
         android:id="@+id/color_picker"
@@ -27,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView3"
         tools:primaryColor="@color/colorPrimary"
-        tools:secondaryColor="@color/colorAccent"/>
+        tools:secondaryColor="@color/colorAccent" />
 
     <TextView
         android:id="@+id/textView4"
@@ -39,7 +38,7 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <CheckBox
         android:id="@+id/include_keylines"
@@ -47,7 +46,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView4"/>
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView5"
@@ -58,7 +57,7 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <CheckBox
         android:id="@+id/include_custom_grid_size"
@@ -66,7 +65,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5"/>
+        app:layout_constraintTop_toTopOf="@+id/textView5" />
 
     <com.digitex.designertools.widget.VerticalSeekBar
         android:id="@+id/row_sizer"
@@ -75,7 +74,7 @@
         android:max="10"
         app:layout_constraintBottom_toBottomOf="@+id/grid_preview"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <com.digitex.designertools.widget.GridPreview
         android:id="@+id/grid_preview"
@@ -83,7 +82,7 @@
         android:layout_height="@dimen/grid_preview_height"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/row_sizer"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <SeekBar
         android:id="@+id/column_sizer"
@@ -94,6 +93,6 @@
         android:max="10"
         app:layout_constraintEnd_toEndOf="@+id/grid_preview"
         app:layout_constraintStart_toStartOf="@+id/grid_preview"
-        app:layout_constraintTop_toBottomOf="@+id/grid_preview"/>
+        app:layout_constraintTop_toBottomOf="@+id/grid_preview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

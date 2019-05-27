@@ -13,7 +13,7 @@
 
     </style>
 
-    <style name="AppTheme.Credits" >
+    <style name="AppTheme.Credits">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -53,8 +53,8 @@
     </style>
 
     <declare-styleable name="DualColorPicker">
-        <attr name="primaryColor" format="reference|color"/>
-        <attr name="secondaryColor" format="reference|color"/>
+        <attr name="primaryColor" format="reference|color" />
+        <attr name="secondaryColor" format="reference|color" />
     </declare-styleable>
 
 </resources>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +12,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/header_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/header_title"
-        tools:src="@drawable/ic_qs_grid_on"/>
+        tools:src="@drawable/ic_qs_grid_on" />
 
     <TextView
         android:id="@+id/header_title"
@@ -24,7 +23,7 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/header_icon"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
         android:id="@+id/enable_switch"
@@ -32,7 +31,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/header_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/header_title"/>
+        app:layout_constraintTop_toTopOf="@+id/header_title" />
 
     <TextView
         android:id="@+id/header_summary"
@@ -43,6 +42,6 @@
         android:text="@string/header_summary_grid_overlay"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/header_title"/>
+        app:layout_constraintTop_toBottomOf="@+id/header_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
