@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.digitex.designertools.widget.DualColorPicker
-        android:id="@+id/color_picker"
+        android:id="@+id/colorPicker"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <CheckBox
-        android:id="@+id/include_keylines"
+        android:id="@+id/keylinesCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <CheckBox
-        android:id="@+id/include_custom_grid_size"
+        android:id="@+id/customGridSizeCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
@@ -68,31 +68,31 @@
         app:layout_constraintTop_toTopOf="@+id/textView5" />
 
     <com.digitex.designertools.widget.VerticalSeekBar
-        android:id="@+id/row_sizer"
+        android:id="@+id/rowSeekBar"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:max="10"
-        app:layout_constraintBottom_toBottomOf="@+id/grid_preview"
+        app:layout_constraintBottom_toBottomOf="@+id/gridPreview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <com.digitex.designertools.widget.GridPreview
-        android:id="@+id/grid_preview"
+        android:id="@+id/gridPreview"
         android:layout_width="@dimen/grid_preview_width"
         android:layout_height="@dimen/grid_preview_height"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/row_sizer"
+        app:layout_constraintStart_toEndOf="@+id/rowSeekBar"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <SeekBar
-        android:id="@+id/column_sizer"
+        android:id="@+id/columnSeekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginTop="8dp"
         android:max="10"
-        app:layout_constraintEnd_toEndOf="@+id/grid_preview"
-        app:layout_constraintStart_toStartOf="@+id/grid_preview"
-        app:layout_constraintTop_toBottomOf="@+id/grid_preview" />
+        app:layout_constraintEnd_toEndOf="@+id/gridPreview"
+        app:layout_constraintStart_toStartOf="@+id/gridPreview"
+        app:layout_constraintTop_toBottomOf="@+id/gridPreview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

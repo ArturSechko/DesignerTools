@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ImageView
-        android:id="@+id/portrait_image"
+        android:id="@+id/portraitImage"
         android:layout_width="100dp"
         android:layout_height="172dp"
         android:layout_marginTop="4dp"
@@ -47,45 +47,45 @@
         android:text="@string/landscape"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/landscape_image"
-        app:layout_constraintStart_toStartOf="@+id/landscape_image" />
+        app:layout_constraintBottom_toTopOf="@+id/landscapeImage"
+        app:layout_constraintStart_toStartOf="@+id/landscapeImage" />
 
     <ImageView
-        android:id="@+id/landscape_image"
+        android:id="@+id/landscapeImage"
         android:layout_width="172dp"
         android:layout_height="100dp"
         android:layout_marginStart="28dp"
         android:background="@drawable/pick_mock_overlay_background"
         android:padding="2dp"
-        app:layout_constraintStart_toEndOf="@+id/portrait_image"
-        app:layout_constraintTop_toTopOf="@+id/portrait_image" />
+        app:layout_constraintStart_toEndOf="@+id/portraitImage"
+        app:layout_constraintTop_toTopOf="@+id/portraitImage" />
 
     <Button
-        android:id="@+id/reset"
+        android:id="@+id/resetBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:text="@string/reset_mokcups"
         android:textColor="?android:attr/textColorSecondary"
-        app:layout_constraintBottom_toBottomOf="@+id/portrait_image"
-        app:layout_constraintEnd_toEndOf="@+id/landscape_image" />
+        app:layout_constraintBottom_toBottomOf="@+id/portraitImage"
+        app:layout_constraintEnd_toEndOf="@+id/landscapeImage" />
 
     <TextView
-        android:id="@+id/opacity_text"
+        android:id="@+id/opacityTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/portrait_image" />
+        app:layout_constraintTop_toBottomOf="@+id/portraitImage" />
 
     <SeekBar
-        android:id="@+id/opacity"
+        android:id="@+id/opacitySeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:max="8"
-        app:layout_constraintTop_toBottomOf="@+id/opacity_text" />
+        app:layout_constraintTop_toBottomOf="@+id/opacityTv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

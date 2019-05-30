@@ -6,35 +6,35 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/header_icon"
+        android:id="@+id/cardIcon"
         android:layout_width="@dimen/card_header_icon_size"
         android:layout_height="@dimen/card_header_icon_size"
-        app:layout_constraintBottom_toBottomOf="@+id/header_title"
+        app:layout_constraintBottom_toBottomOf="@+id/cardTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/header_title"
+        app:layout_constraintTop_toTopOf="@+id/cardTitle"
         tools:src="@drawable/ic_qs_grid_on" />
 
     <TextView
-        android:id="@+id/header_title"
+        android:id="@+id/cardTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/header_title_grid_overlay"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/header_icon"
+        app:layout_constraintStart_toEndOf="@+id/cardIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
-        android:id="@+id/enable_switch"
+        android:id="@+id/enableSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/header_title"
+        app:layout_constraintBottom_toBottomOf="@+id/cardTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/header_title" />
+        app:layout_constraintTop_toTopOf="@+id/cardTitle" />
 
     <TextView
-        android:id="@+id/header_summary"
+        android:id="@+id/cardSummary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -42,6 +42,6 @@
         android:text="@string/header_summary_grid_overlay"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/header_title" />
+        app:layout_constraintTop_toBottomOf="@+id/cardTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

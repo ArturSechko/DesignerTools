@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorAccent">@color/colorAccent</item>
@@ -36,7 +34,10 @@
         <item name="android:colorAccent">@color/colorScreenshotAccent</item>
     </style>
 
-    <style name="AppDialog" parent="@android:style/Theme.Material.Light.Dialog.NoActionBar" />
+    <style name="AppDialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
     <style name="ScreenshotInfoSubHeading">
         <item name="android:textSize">12sp</item>
@@ -48,8 +49,12 @@
         <item name="android:textColor">#ffffff</item>
     </style>
 
-    <style name="TransparentTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
-
+    <style name="TransparentTheme" parent="@style/Theme.MaterialComponents">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <declare-styleable name="DualColorPicker">

@@ -8,9 +8,9 @@
         android:shortcutShortLabel="@string/header_title_grid_overlay">
 
         <intent
-            android:action="com.scheffsblend.designertools.action.SHOW_GRID_OVERLAY"
+            android:action="com.digitex.designertools.action.SHOW_GRID_OVERLAY"
             android:targetClass="com.digitex.designertools.ui.AppShortcutsActivity"
-            android:targetPackage="com.scheffsblend.designertools"/>
+            android:targetPackage="com.digitex.designertools" />
 
     </shortcut>
 
@@ -21,9 +21,9 @@
         android:shortcutShortLabel="@string/header_title_mockup_overlay">
 
         <intent
-            android:action="com.scheffsblend.designertools.action.SHOW_MOCK_OVERLAY"
+            android:action="com.digitex.designertools.action.SHOW_MOCK_OVERLAY"
             android:targetClass="com.digitex.designertools.ui.AppShortcutsActivity"
-            android:targetPackage="com.scheffsblend.designertools"/>
+            android:targetPackage="com.digitex.designertools" />
 
     </shortcut>
 
@@ -34,9 +34,9 @@
         android:shortcutShortLabel="@string/header_title_color_picker">
 
         <intent
-            android:action="com.scheffsblend.designertools.action.SHOW_COLOR_PICKER_OVERLAY"
+            android:action="com.digitex.designertools.action.SHOW_COLOR_PICKER_OVERLAY"
             android:targetClass="com.digitex.designertools.ui.AppShortcutsActivity"
-            android:targetPackage="com.scheffsblend.designertools"/>
+            android:targetPackage="com.digitex.designertools" />
 
     </shortcut>
 

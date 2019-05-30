@@ -13,7 +13,7 @@
         android:src="@drawable/img_header_bg" />
 
     <ImageView
-        android:id="@+id/header_glyph"
+        android:id="@+id/headerImage"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
@@ -23,8 +23,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header_glyph"
-        android:layout_alignStart="@id/header_glyph"
+        android:layout_below="@id/headerImage"
+        android:layout_alignStart="@id/headerImage"
         android:text="Credits"
         android:textSize="34sp" />
 
