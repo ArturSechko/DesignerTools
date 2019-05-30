@@ -46,7 +46,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/textView4"
+        app:useMaterialThemeColors="false" />
 
     <TextView
         android:id="@+id/textView5"
@@ -65,7 +66,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintTop_toTopOf="@+id/textView5"
+        app:useMaterialThemeColors="false" />
 
     <com.digitex.designertools.widget.VerticalSeekBar
         android:id="@+id/rowSeekBar"

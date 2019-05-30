@@ -2,13 +2,12 @@
 <resources>
 
     <style name="AppTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorSecondary">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
-        <item name="android:windowLightStatusBar">true</item>
-
+        <item name="minTouchTargetSize">0dp</item>
     </style>
 
     <style name="AppTheme.Credits">
@@ -19,19 +18,19 @@
     </style>
 
     <style name="AppTheme.GridOverlayCard">
-        <item name="android:colorAccent">@color/colorGridOverlayAccent</item>
+        <item name="colorSecondary">@color/colorGridOverlayAccent</item>
     </style>
 
     <style name="AppTheme.MockupOverlayCard">
-        <item name="android:colorAccent">@color/colorMockupOverlayAccent</item>
+        <item name="colorSecondary">@color/colorMockupOverlayAccent</item>
     </style>
 
     <style name="AppTheme.ColorPickerCard">
-        <item name="android:colorAccent">@color/colorColorPickerAccent</item>
+        <item name="colorSecondary">@color/colorColorPickerAccent</item>
     </style>
 
     <style name="AppTheme.ScreenshotCard">
-        <item name="android:colorAccent">@color/colorScreenshotAccent</item>
+        <item name="colorSecondary">@color/colorScreenshotAccent</item>
     </style>
 
     <style name="AppDialog" parent="@style/Theme.MaterialComponents.Light.Dialog">
