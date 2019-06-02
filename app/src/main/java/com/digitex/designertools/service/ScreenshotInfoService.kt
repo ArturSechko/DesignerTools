@@ -13,10 +13,11 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.FrameLayout
 import androidx.core.content.getSystemService
 import androidx.core.graphics.createBitmap
+import androidx.core.view.drawToBitmap
 import com.digitex.designertools.R
-import com.digitex.designertools.ext.renderToBitmap
 import com.digitex.designertools.utils.isCyanogenMod
 import kotlinx.android.synthetic.main.screenshot_info.view.*
 import java.io.*
@@ -188,5 +189,18 @@ class ScreenshotInfoService : IntentService(ScreenshotInfoService::class.java.si
             "Unavailable"
         }
     }
+}
 
+private fun View.renderToBitmap(): Bitmap {
+    layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+    )
+    measure(
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+    )
+    layout(0, 0, measuredWidth, measuredHeight)
+
+    return drawToBitmap()
 }

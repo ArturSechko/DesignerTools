@@ -302,9 +302,9 @@ class ColorPickerOverlay : Service() {
         }
 
         magnifierView.apply {
-            magnifierIsAnimating = true
             spring(SpringAnimation.SCALE_Y).animate(0f, 1f)
             spring(SpringAnimation.SCALE_X).doOnEnd { _, _, _, _ ->
+                magnifierIsAnimating = true
                 magnifierNodeView.isVisible = true
                 magnifierNodeAnim.start()
             }.animate(0f, 1f)
