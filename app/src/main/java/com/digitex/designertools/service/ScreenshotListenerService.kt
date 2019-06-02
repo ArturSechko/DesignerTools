@@ -16,8 +16,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.digitex.designertools.R
 import com.digitex.designertools.ui.DesignerToolsActivity
-import com.digitex.designertools.utils.NotificationUtils
-import com.digitex.designertools.utils.PreferenceUtils
+import com.digitex.designertools.utils.Preferences
+import com.digitex.designertools.utils.createNotificationChannel
 
 class ScreenshotListenerService
     : Service(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -28,7 +28,7 @@ class ScreenshotListenerService
 
     override fun onCreate() {
         super.onCreate()
-        PreferenceUtils.getShardedPreferences(this).registerOnSharedPreferenceChangeListener(this)
+        Preferences.prefs.registerOnSharedPreferenceChangeListener(this)
         startForeground(42, getPersistentNotification())
     }
 
@@ -46,14 +46,13 @@ class ScreenshotListenerService
 
     override fun onDestroy() {
         super.onDestroy()
-        PreferenceUtils.getShardedPreferences(this)
-                .unregisterOnSharedPreferenceChangeListener(this)
+        Preferences.prefs.unregisterOnSharedPreferenceChangeListener(this)
         contentResolver.unregisterContentObserver(screenshotObserver)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (PreferenceUtils.ScreenshotPreferences.KEY_SCREENSHOT_INFO == key) {
-            val enabled = PreferenceUtils.ScreenshotPreferences.getScreenshotInfoEnabled(this, false)
+        if (Preferences.Screenshot.screenshotInfo == key) {
+            val enabled = Preferences.Screenshot.getScreenshotInfoEnabled()
             if (!enabled) {
                 stopSelf()
             }
@@ -61,14 +60,8 @@ class ScreenshotListenerService
     }
 
     private fun getPersistentNotification(): Notification {
-        return NotificationCompat.Builder(
-                this,
-                NotificationUtils.createNotificationChannel(
-                        this,
-                        javaClass.simpleName,
-                        "Screenshot info"
-                )
-        ).apply {
+        val channelId = createNotificationChannel(javaClass.simpleName, "Screenshot info")
+        return NotificationCompat.Builder(this, channelId).apply {
             val text = getString(R.string.notif_content_screenshot_info)
             priority = NotificationManagerCompat.IMPORTANCE_MIN
             setSmallIcon(R.drawable.ic_qs_screenshotinfo_on)

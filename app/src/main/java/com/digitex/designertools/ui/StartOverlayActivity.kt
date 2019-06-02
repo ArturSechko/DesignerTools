@@ -8,9 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.digitex.designertools.overlays.GridOverlay
 import com.digitex.designertools.overlays.MockOverlay
-import com.digitex.designertools.utils.LaunchUtils
-import com.digitex.designertools.utils.PreferenceUtils.GridPreferences
-import com.digitex.designertools.utils.PreferenceUtils.MockPreferences
+import com.digitex.designertools.utils.Preferences
+import com.digitex.designertools.utils.startColorPickerOrRequestPermission
 
 class StartOverlayActivity : AppCompatActivity() {
 
@@ -52,16 +51,16 @@ class StartOverlayActivity : AppCompatActivity() {
         when (overlayType) {
             GRID_OVERLAY -> {
                 startService(newIntent)
-                GridPreferences.setGridOverlayActive(this, true)
-                GridPreferences.setGridQsTileEnabled(this, true)
+                Preferences.Grid.setGridOverlayActive(true)
+                Preferences.Grid.setGridQsTileEnabled(true)
             }
             MOCK_OVERLAY -> {
                 newIntent = Intent(this, MockOverlay::class.java)
                 startService(newIntent)
-                MockPreferences.setMockOverlayActive(this, true)
-                MockPreferences.setMockQsTileEnabled(this, true)
+                Preferences.Mock.setMockOverlayActive(true)
+                Preferences.Mock.setMockQsTileEnabled(true)
             }
-            COLOR_PICKER_OVERLAY -> LaunchUtils.startColorPickerOrRequestPermission(this)
+            COLOR_PICKER_OVERLAY -> startColorPickerOrRequestPermission()
         }
     }
 

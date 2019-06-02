@@ -18,11 +18,11 @@ import androidx.core.content.getSystemService
 import androidx.core.view.doOnPreDraw
 import com.digitex.designertools.R
 import com.digitex.designertools.designerApplication
-import com.digitex.designertools.isAtLeastSdk
+import com.digitex.designertools.utils.isAtLeastSdk
 import com.digitex.designertools.overlays.view.GridOverlayView
 import com.digitex.designertools.qs.GridQuickSettingsTile
 import com.digitex.designertools.qs.OnOffTileState
-import com.digitex.designertools.utils.NotificationUtils
+import com.digitex.designertools.utils.createNotificationChannel
 
 class GridOverlay : Service() {
 
@@ -101,7 +101,7 @@ class GridOverlay : Service() {
                 Intent(if (actionIsHide) ACTION_HIDE_OVERLAY else ACTION_SHOW_OVERLAY),
                 0
         )
-        val channelId = NotificationUtils.createNotificationChannel(this, javaClass.simpleName, "Grid overlay")
+        val channelId = createNotificationChannel(javaClass.simpleName, "Grid overlay")
         val builder = NotificationCompat.Builder(this, channelId)
         val text = getString(if (actionIsHide)
             R.string.notif_content_hide_grid_overlay

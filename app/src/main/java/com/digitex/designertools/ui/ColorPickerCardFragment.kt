@@ -8,8 +8,9 @@ import android.widget.CompoundButton
 import com.digitex.designertools.R
 import com.digitex.designertools.designerApplication
 import com.digitex.designertools.qs.OnOffTileState
-import com.digitex.designertools.utils.LaunchUtils
-import com.digitex.designertools.utils.PreferenceUtils.ColorPickerPreferences
+import com.digitex.designertools.utils.Preferences
+import com.digitex.designertools.utils.cancelColorPickerOrUnpublishTile
+import com.digitex.designertools.utils.launchColorPickerOrPublishTile
 import kotlinx.android.synthetic.main.card_header.*
 
 class ColorPickerCardFragment : DesignerToolCardFragment() {
@@ -42,15 +43,14 @@ class ColorPickerCardFragment : DesignerToolCardFragment() {
 
     private fun enableFeature(enable: Boolean) {
         if (enable) {
-            LaunchUtils.lauchColorPickerOrPublishTile(
-                    context,
-                    if (ColorPickerPreferences.getColorPickerActive(context, false))
+            launchColorPickerOrPublishTile(
+                    if (Preferences.ColorPicker.getColorPickerActive())
                         OnOffTileState.STATE_ON
                     else
                         OnOffTileState.STATE_OFF
             )
         } else {
-            LaunchUtils.cancelColorPickerOrUnpublishTile(context)
+            cancelColorPickerOrUnpublishTile()
         }
     }
 

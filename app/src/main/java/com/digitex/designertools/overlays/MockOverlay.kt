@@ -18,11 +18,11 @@ import androidx.core.content.getSystemService
 import androidx.core.view.doOnPreDraw
 import com.digitex.designertools.R
 import com.digitex.designertools.designerApplication
-import com.digitex.designertools.isAtLeastSdk
+import com.digitex.designertools.utils.isAtLeastSdk
 import com.digitex.designertools.overlays.view.MockOverlayView
 import com.digitex.designertools.qs.MockQuickSettingsTile
 import com.digitex.designertools.qs.OnOffTileState
-import com.digitex.designertools.utils.NotificationUtils
+import com.digitex.designertools.utils.createNotificationChannel
 
 class MockOverlay : Service() {
 
@@ -108,7 +108,7 @@ class MockOverlay : Service() {
                 Intent(if (actionIsHide) ACTION_HIDE_OVERLAY else ACTION_SHOW_OVERLAY),
                 0
         )
-        val channelId = NotificationUtils.createNotificationChannel(this, javaClass.simpleName, "Mockup overlay")
+        val channelId = createNotificationChannel(javaClass.simpleName, "Mockup overlay")
         val builder = NotificationCompat.Builder(this, channelId)
         val text = getString(if (actionIsHide)
             R.string.notif_content_hide_mock_overlay

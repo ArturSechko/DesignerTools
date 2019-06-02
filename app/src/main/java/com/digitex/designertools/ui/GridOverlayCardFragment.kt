@@ -12,10 +12,9 @@ import com.digitex.designertools.R
 import com.digitex.designertools.designerApplication
 import com.digitex.designertools.ext.setOnSeekBarChangeListener
 import com.digitex.designertools.qs.OnOffTileState
-import com.digitex.designertools.utils.ColorUtils
-import com.digitex.designertools.utils.LaunchUtils
-import com.digitex.designertools.utils.PreferenceUtils
-import com.digitex.designertools.utils.PreferenceUtils.GridPreferences
+import com.digitex.designertools.utils.Preferences
+import com.digitex.designertools.utils.cancelGridOverlayOrUnpublishTile
+import com.digitex.designertools.utils.lauchGridOverlayOrPublishTile
 import kotlinx.android.synthetic.main.card_header.*
 import kotlinx.android.synthetic.main.card_layout.view.*
 import kotlinx.android.synthetic.main.include_grid_overlay.*
@@ -33,10 +32,10 @@ class GridOverlayCardFragment : DesignerToolCardFragment(), SharedPreferences.On
         val size = 4 + progress * 2
         if (seekBar === columnSeekBar) {
             gridPreview.columnSizeDp = size
-            GridPreferences.setGridColumnSize(context, size)
+            Preferences.Grid.setGridColumnSize(size)
         } else if (seekBar === rowSeekBar) {
             gridPreview.rowSizeDp = size
-            GridPreferences.setGridRowSize(context, size)
+            Preferences.Grid.setGridRowSize(size)
         }
     }
 
@@ -53,25 +52,25 @@ class GridOverlayCardFragment : DesignerToolCardFragment(), SharedPreferences.On
         cardSummary.setText(R.string.header_summary_grid_overlay)
         cardIcon.setImageResource(R.drawable.ic_qs_grid_on)
 
-        columnSeekBar.progress = (GridPreferences.getGridColumnSize(context, 8) - 4) / 2
-        rowSeekBar.progress = (GridPreferences.getGridRowSize(context, 8) - 4) / 2
-        gridPreview.columnSizeDp = GridPreferences.getGridColumnSize(context, 8)
-        gridPreview.rowSizeDp = GridPreferences.getGridRowSize(context, 8)
+        columnSeekBar.progress = (Preferences.Grid.getGridColumnSize(8) - 4) / 2
+        rowSeekBar.progress = (Preferences.Grid.getGridRowSize(8) - 4) / 2
+        gridPreview.columnSizeDp = Preferences.Grid.getGridColumnSize(8)
+        gridPreview.rowSizeDp = Preferences.Grid.getGridRowSize(8)
 
         columnSeekBar.setOnSeekBarChangeListener(onProgressChanged = seekBarChangeAction)
         rowSeekBar.setOnSeekBarChangeListener(onProgressChanged = seekBarChangeAction)
 
-        keylinesCheckBox.isChecked = GridPreferences.getShowKeylines(context, false)
+        keylinesCheckBox.isChecked = Preferences.Grid.getShowKeylines()
         keylinesCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            GridPreferences.setShowKeylines(context, isChecked)
+            Preferences.Grid.setShowKeylines(isChecked)
         }
 
-        setIncludeCustomGridLines(GridPreferences.getUseCustomGridSize(context, false))
+        setIncludeCustomGridLines(Preferences.Grid.getUseCustomGridSize())
         customGridSizeCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            GridPreferences.setUseCustomGridSize(context, isChecked)
+            Preferences.Grid.setUseCustomGridSize(isChecked)
             if (isChecked) {
-                GridPreferences.setGridColumnSize(context, gridPreview.columnSizeDp)
-                GridPreferences.setGridRowSize(context, gridPreview.rowSizeDp)
+                Preferences.Grid.setGridColumnSize(gridPreview.columnSizeDp)
+                Preferences.Grid.setGridRowSize(gridPreview.rowSizeDp)
             }
             columnSeekBar.isEnabled = isChecked
             rowSeekBar.isEnabled = isChecked
@@ -93,37 +92,34 @@ class GridOverlayCardFragment : DesignerToolCardFragment(), SharedPreferences.On
 
     override fun onResume() {
         super.onResume()
-        PreferenceUtils.getShardedPreferences(context)
-                .registerOnSharedPreferenceChangeListener(this)
+        Preferences.prefs.registerOnSharedPreferenceChangeListener(this)
         enableSwitch.isChecked = designerApplication.isGridOverlayOn
     }
 
     override fun onPause() {
         super.onPause()
-        PreferenceUtils.getShardedPreferences(context)
-                .unregisterOnSharedPreferenceChangeListener(this)
+        Preferences.prefs.unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
         if (isChecked == designerApplication.isGridOverlayOn) return
         if (isChecked) {
-            LaunchUtils.lauchGridOverlayOrPublishTile(
-                    context,
-                    if (GridPreferences.getGridOverlayActive(context, false))
+            lauchGridOverlayOrPublishTile(
+                    if (Preferences.Grid.getGridOverlayActive())
                         OnOffTileState.STATE_ON
                     else
                         OnOffTileState.STATE_OFF
             )
         } else {
-            LaunchUtils.cancelGridOverlayOrUnpublishTile(context)
+            cancelGridOverlayOrUnpublishTile()
         }
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (GridPreferences.KEY_GRID_LINE_COLOR == key) {
-            colorPicker.primaryColor = ColorUtils.getGridLineColor(context)
-        } else if (GridPreferences.KEY_KEYLINE_COLOR == key) {
-            colorPicker.secondaryColor = ColorUtils.getKeylineColor(context)
+        if (Preferences.Grid.gridLineColor == key) {
+            colorPicker.primaryColor = Preferences.Grid.getGridLineColor()
+        } else if (Preferences.Grid.keylineColor == key) {
+            colorPicker.secondaryColor = Preferences.Grid.getKeylineColor()
         }
     }
 

@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.CompoundButton
 import com.digitex.designertools.R
 import com.digitex.designertools.service.ScreenshotListenerService
-import com.digitex.designertools.utils.PreferenceUtils.ScreenshotPreferences
+import com.digitex.designertools.utils.Preferences
 import kotlinx.android.synthetic.main.card_header.*
 
 class ScreenshotCardFragment : DesignerToolCardFragment() {
@@ -20,7 +20,7 @@ class ScreenshotCardFragment : DesignerToolCardFragment() {
         cardTitle.setText(R.string.header_title_screenshot)
         cardSummary.setText(R.string.header_summary_screenshot)
         cardIcon.setImageResource(R.drawable.ic_qs_screenshotinfo_on)
-        enableSwitch.isChecked = ScreenshotPreferences.getScreenshotInfoEnabled(context, false)
+        enableSwitch.isChecked = Preferences.Screenshot.getScreenshotInfoEnabled()
     }
 
     override fun onRequestPermissionsResult(
@@ -29,7 +29,7 @@ class ScreenshotCardFragment : DesignerToolCardFragment() {
             grantResults: IntArray
     ) {
         if (grantResults.size == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            ScreenshotPreferences.setScreenshotInfoEnabled(context, true)
+            Preferences.Screenshot.setScreenshotInfoEnabled(true)
             val newIntent = Intent(context, ScreenshotListenerService::class.java)
             requireContext().startService(newIntent)
             enableSwitch.isChecked = true
@@ -43,7 +43,7 @@ class ScreenshotCardFragment : DesignerToolCardFragment() {
 
         if (isChecked) {
             if (requireContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                ScreenshotPreferences.setScreenshotInfoEnabled(context, isChecked)
+                Preferences.Screenshot.setScreenshotInfoEnabled(isChecked)
                 val newIntent = Intent(context, ScreenshotListenerService::class.java)
                 requireContext().startService(newIntent)
             } else {
@@ -51,7 +51,7 @@ class ScreenshotCardFragment : DesignerToolCardFragment() {
                 requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 42)
             }
         } else {
-            ScreenshotPreferences.setScreenshotInfoEnabled(context, false)
+            Preferences.Screenshot.setScreenshotInfoEnabled(false)
         }
     }
 }

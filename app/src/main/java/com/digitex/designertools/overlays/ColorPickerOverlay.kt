@@ -35,10 +35,10 @@ import androidx.core.view.isVisible
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.digitex.designertools.R
 import com.digitex.designertools.designerApplication
-import com.digitex.designertools.isAtLeastSdk
+import com.digitex.designertools.utils.isAtLeastSdk
 import com.digitex.designertools.qs.ColorPickerQuickSettingsTile
 import com.digitex.designertools.qs.OnOffTileState
-import com.digitex.designertools.utils.NotificationUtils
+import com.digitex.designertools.utils.createNotificationChannel
 import com.digitex.designertools.widget.MagnifierNodeView
 import com.digitex.designertools.widget.MagnifierView
 
@@ -432,7 +432,7 @@ class ColorPickerOverlay : Service() {
                 Intent(if (actionIsHide) ACTION_HIDE_PICKER else ACTION_SHOW_PICKER),
                 0
         )
-        val channelId = NotificationUtils.createNotificationChannel(this, javaClass.simpleName, "Color Picker overlay")
+        val channelId = createNotificationChannel(javaClass.simpleName, "Color Picker overlay")
         val builder = NotificationCompat.Builder(this, channelId)
         val text = if (actionIsHide) R.string.notif_content_hide_picker else R.string.notif_content_show_picker
         return builder.setPriority(NotificationManagerCompat.IMPORTANCE_MIN)

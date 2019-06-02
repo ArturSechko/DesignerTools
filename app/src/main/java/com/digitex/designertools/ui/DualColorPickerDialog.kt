@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.viewpager.widget.PagerAdapter
 import com.digitex.designertools.R
-import com.digitex.designertools.utils.ColorUtils
-import com.digitex.designertools.utils.PreferenceUtils.GridPreferences
+import com.digitex.designertools.utils.Preferences
 import kotlinx.android.synthetic.main.dialog_color_picker.view.*
 import kotlinx.android.synthetic.main.lobsterpicker.view.*
 
@@ -42,8 +41,8 @@ class DualColorPickerDialog : DialogFragment() {
                 .setView(view)
                 .setTitle(R.string.color_picker_title)
                 .setPositiveButton(R.string.color_picker_accept) { _, _ ->
-                    GridPreferences.setGridLineColor(context, colorPickerViews[0].container.colorPicker.color)
-                    GridPreferences.setKeylineColor(context, colorPickerViews[1].container.colorPicker.color)
+                    Preferences.Grid.setGridLineColor(colorPickerViews[0].container.colorPicker.color)
+                    Preferences.Grid.setKeylineColor(colorPickerViews[1].container.colorPicker.color)
                 }
                 .setNegativeButton(R.string.color_picker_cancel) { dialog, _ -> dialog.dismiss() }
                 .create()
@@ -53,7 +52,7 @@ class DualColorPickerDialog : DialogFragment() {
         colorPickerViews[0].container = View.inflate(context, R.layout.lobsterpicker, null)
         with(colorPickerViews[0].container) {
             colorPicker.addDecorator(opacitySeekBar)
-            val color = ColorUtils.getGridLineColor(context)
+            val color = Preferences.Grid.getGridLineColor()
             colorPicker.color = color
             colorPicker.history = color
             opacitySeekBar.setOnTouchListener(sliderTouchListener)
@@ -62,7 +61,7 @@ class DualColorPickerDialog : DialogFragment() {
         colorPickerViews[1].container = View.inflate(context, R.layout.lobsterpicker, null)
         with(colorPickerViews[1].container) {
             colorPicker.addDecorator(opacitySeekBar)
-            val color = ColorUtils.getKeylineColor(context)
+            val color = Preferences.Grid.getKeylineColor()
             colorPicker.color = color
             colorPicker.history = color
             opacitySeekBar.setOnTouchListener(sliderTouchListener)

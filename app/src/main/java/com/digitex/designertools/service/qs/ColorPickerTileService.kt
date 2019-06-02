@@ -5,7 +5,9 @@ import androidx.annotation.RequiresApi
 import com.digitex.designertools.R
 import com.digitex.designertools.designerApplication
 import com.digitex.designertools.qs.OnOffTileState
-import com.digitex.designertools.utils.LaunchUtils
+import com.digitex.designertools.utils.cancelColorPickerOverlay
+import com.digitex.designertools.utils.launchColorPickerOverlay
+import com.digitex.designertools.utils.publishColorPickerTile
 
 @RequiresApi(Build.VERSION_CODES.N)
 class ColorPickerTileService : TileServiceBase() {
@@ -17,11 +19,11 @@ class ColorPickerTileService : TileServiceBase() {
     override fun onClick() {
         super.onClick()
         if (tileIsOn) {
-            LaunchUtils.publishColorPickerTile(this, OnOffTileState.STATE_OFF)
-            LaunchUtils.cancelColorPickerOverlay(this)
+            publishColorPickerTile(OnOffTileState.STATE_OFF)
+            cancelColorPickerOverlay()
         } else {
-            LaunchUtils.publishColorPickerTile(this, OnOffTileState.STATE_ON)
-            LaunchUtils.launchColorPickerOverlay(this)
+            publishColorPickerTile(OnOffTileState.STATE_ON)
+            launchColorPickerOverlay()
         }
     }
 

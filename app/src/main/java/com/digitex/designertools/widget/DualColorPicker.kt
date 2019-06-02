@@ -9,7 +9,7 @@ import android.view.View
 import androidx.core.content.withStyledAttributes
 import com.digitex.designertools.R
 import com.digitex.designertools.ext.getDarkenedColor
-import com.digitex.designertools.utils.PreferenceUtils
+import com.digitex.designertools.utils.Preferences
 
 class DualColorPicker @JvmOverloads constructor(
         context: Context,
@@ -46,10 +46,8 @@ class DualColorPicker @JvmOverloads constructor(
 
     init {
         context.withStyledAttributes(attrs, R.styleable.DualColorPicker) {
-            val defPrimaryColor = PreferenceUtils.GridPreferences.getGridLineColor(context, resources
-                    .getColor(R.color.dualColorPickerDefaultPrimaryColor, null))
-            val defSecondaryColor = PreferenceUtils.GridPreferences.getKeylineColor(context, resources
-                    .getColor(R.color.dualColorPickerDefaultSecondaryColor, null))
+            val defPrimaryColor = Preferences.Grid.getGridLineColor()
+            val defSecondaryColor = Preferences.Grid.getKeylineColor()
 
             val primaryColor = getColor(R.styleable.DualColorPicker_primaryColor, defPrimaryColor)
             val secondaryColor = getColor(R.styleable.DualColorPicker_secondaryColor, defSecondaryColor)

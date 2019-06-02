@@ -3,7 +3,7 @@ package com.digitex.designertools
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
-import com.digitex.designertools.utils.PreferenceUtils.*
+import com.digitex.designertools.utils.Preferences
 
 internal val designerApplication: DesignerToolsApplication = DesignerToolsApplication.instance
 
@@ -15,11 +15,11 @@ class DesignerToolsApplication : Application() {
         private set
 
     var isGridOverlayOn: Boolean = false
-        get() = field || GridPreferences.getGridQsTileEnabled(this, false)
+        get() = field || Preferences.Grid.getGridQsTileEnabled()
     var isMockOverlayOn: Boolean = false
-        get() = field || MockPreferences.getMockQsTileEnabled(this, false)
+        get() = field || Preferences.Mock.getMockQsTileEnabled()
     var isColorPickerOn: Boolean = false
-        get() = field || ColorPickerPreferences.getColorPickerQsTileEnabled(this, false)
+        get() = field || Preferences.ColorPicker.getColorPickerQsTileEnabled()
 
     init {
         instance = this

@@ -16,8 +16,8 @@ import android.view.WindowManager
 import androidx.core.content.getSystemService
 import androidx.core.graphics.createBitmap
 import com.digitex.designertools.R
-import com.digitex.designertools.utils.LaunchUtils
-import com.digitex.designertools.utils.LayoutRenderUtils
+import com.digitex.designertools.ext.renderToBitmap
+import com.digitex.designertools.utils.isCyanogenMod
 import kotlinx.android.synthetic.main.screenshot_info.view.*
 import java.io.*
 import java.lang.reflect.InvocationTargetException
@@ -66,12 +66,12 @@ class ScreenshotInfoService : IntentService(ScreenshotInfoService::class.java.si
         pane.density.text = density
         pane.kernel.text = kernelVersion
 
-        return LayoutRenderUtils.renderViewToBitmap(pane)
+        return pane.renderToBitmap()
     }
 
     @SuppressLint("PrivateApi")
     private fun getCmVersionString(context: Context): String {
-        if (LaunchUtils.isCyanogenMod(context)) {
+        if (isCyanogenMod()) {
             val cl = context.classLoader
             val systemProperties: Class<*>?
             try {

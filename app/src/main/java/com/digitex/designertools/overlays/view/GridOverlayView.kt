@@ -9,9 +9,7 @@ import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.view.View
 import com.digitex.designertools.R
-import com.digitex.designertools.utils.ColorUtils
-import com.digitex.designertools.utils.PreferenceUtils
-import com.digitex.designertools.utils.PreferenceUtils.GridPreferences
+import com.digitex.designertools.utils.Preferences
 
 internal class GridOverlayView(context: Context) : View(context) {
 
@@ -32,8 +30,8 @@ internal class GridOverlayView(context: Context) : View(context) {
     private val secondKeylineMarkerBounds: Rect = Rect()
     private val thirdKeylineMarkerBounds: Rect = Rect()
 
-    private var showGrid = GridPreferences.getShowGrid(context, false)
-    private var showKeylines = GridPreferences.getShowKeylines(context, false)
+    private var showGrid = Preferences.Grid.getShowGrid()
+    private var showKeylines = Preferences.Grid.getShowKeylines()
 
     private val density: Float = resources.displayMetrics.density
     private val gridLineWidth: Float = density
@@ -42,54 +40,54 @@ internal class GridOverlayView(context: Context) : View(context) {
     private val keylineWidth: Float = 1.5f * density
 
     init {
-        gridPaint.color = ColorUtils.getGridLineColor(context)
+        gridPaint.color = Preferences.Grid.getGridLineColor()
         gridPaint.strokeWidth = gridLineWidth
 
-        keylinePaint.color = ColorUtils.getKeylineColor(context)
+        keylinePaint.color = Preferences.Grid.getKeylineColor()
 
         horizontalGridMarkerLeft = context.getDrawable(R.drawable.ic_marker_horiz_left)!!.mutate()
         horizontalMarkerLeft = context.getDrawable(R.drawable.ic_marker_horiz_left)!!
         horizontalMarkerRight = context.getDrawable(R.drawable.ic_marker_horiz_right)!!
         verticalMarker = context.getDrawable(R.drawable.ic_marker_vert)!!
 
-        val useCustom = GridPreferences.getUseCustomGridSize(context, false)
+        val useCustom = Preferences.Grid.getUseCustomGridSize()
         val defColumnSize = resources.getInteger(R.integer.default_column_size)
         val defRowSize = resources.getInteger(R.integer.default_row_size)
-        columnSize = density * if (!useCustom) defColumnSize else GridPreferences.getGridColumnSize(context, defColumnSize)
-        rowSize = density * if (!useCustom) defRowSize else GridPreferences.getGridRowSize(context, defRowSize)
+        columnSize = density * if (!useCustom) defColumnSize else Preferences.Grid.getGridColumnSize(defColumnSize)
+        rowSize = density * if (!useCustom) defRowSize else Preferences.Grid.getGridRowSize(defRowSize)
     }
 
     private val preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
-        if (GridPreferences.KEY_SHOW_GRID == key) {
-            val enabled = prefs.getBoolean(GridPreferences.KEY_SHOW_GRID, false)
+        if (Preferences.Grid.showGrid == key) {
+            val enabled = prefs.getBoolean(Preferences.Grid.showGrid, false)
             if (showGrid != enabled) {
                 showGrid = enabled
                 invalidate()
             }
-        } else if (GridPreferences.KEY_SHOW_KEYLINES == key) {
-            val enabled = prefs.getBoolean(GridPreferences.KEY_SHOW_KEYLINES, false)
+        } else if (Preferences.Grid.showKeylines == key) {
+            val enabled = prefs.getBoolean(Preferences.Grid.showKeylines, false)
             if (enabled != showKeylines) {
                 showKeylines = enabled
                 invalidate()
             }
-        } else if (GridPreferences.KEY_GRID_COLUMN_SIZE == key) {
-            columnSize = density * GridPreferences.getGridColumnSize(context, resources.getInteger(R.integer.default_column_size))
+        } else if (Preferences.Grid.gridColumnSize == key) {
+            columnSize = density * Preferences.Grid.getGridColumnSize(resources.getInteger(R.integer.default_column_size))
             invalidate()
-        } else if (GridPreferences.KEY_GRID_ROW_SIZE == key) {
-            rowSize = density * GridPreferences.getGridRowSize(context, resources.getInteger(R.integer.default_row_size))
+        } else if (Preferences.Grid.gridRowSize == key) {
+            rowSize = density * Preferences.Grid.getGridRowSize(resources.getInteger(R.integer.default_row_size))
             invalidate()
-        } else if (GridPreferences.KEY_GRID_LINE_COLOR == key) {
-            gridPaint.color = ColorUtils.getGridLineColor(context)
+        } else if (Preferences.Grid.gridLineColor == key) {
+            gridPaint.color = Preferences.Grid.getGridLineColor()
             invalidate()
-        } else if (GridPreferences.KEY_KEYLINE_COLOR == key) {
-            keylinePaint.color = ColorUtils.getKeylineColor(context)
+        } else if (Preferences.Grid.keylineColor == key) {
+            keylinePaint.color = Preferences.Grid.getKeylineColor()
             invalidate()
-        } else if (GridPreferences.KEY_USE_CUSTOM_GRID_SIZE == key) {
-            val useCustom = GridPreferences.getUseCustomGridSize(context, false)
+        } else if (Preferences.Grid.useCustomGridSize == key) {
+            val useCustom = Preferences.Grid.getUseCustomGridSize()
             val defColumnSize = resources.getInteger(R.integer.default_column_size)
             val defRowSize = resources.getInteger(R.integer.default_row_size)
-            columnSize = density * if (!useCustom) defColumnSize else GridPreferences.getGridColumnSize(context, defColumnSize)
-            rowSize = density * if (!useCustom) defRowSize else GridPreferences.getGridRowSize(context, defRowSize)
+            columnSize = density * if (!useCustom) defColumnSize else Preferences.Grid.getGridColumnSize(defColumnSize)
+            rowSize = density * if (!useCustom) defRowSize else Preferences.Grid.getGridRowSize(defRowSize)
             invalidate()
         }
     }
@@ -134,14 +132,12 @@ internal class GridOverlayView(context: Context) : View(context) {
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        val prefs = PreferenceUtils.getShardedPreferences(context)
-        prefs.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
+        Preferences.prefs.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        val prefs = PreferenceUtils.getShardedPreferences(context)
-        prefs.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
+        Preferences.prefs.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
     }
 
     private fun drawGridLines(canvas: Canvas) = canvas.apply {

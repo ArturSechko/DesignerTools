@@ -3,7 +3,7 @@ package com.digitex.designertools.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.digitex.designertools.designerApplication
-import com.digitex.designertools.utils.LaunchUtils
+import com.digitex.designertools.utils.*
 
 class AppShortcutsActivity : AppCompatActivity() {
 
@@ -19,25 +19,25 @@ class AppShortcutsActivity : AppCompatActivity() {
 
     private fun toggleGridOverlay() {
         if (designerApplication.isGridOverlayOn) {
-            LaunchUtils.cancelGridOverlay(this)
+            cancelGridOverlay()
         } else {
-            LaunchUtils.launchGridOverlay(this)
+            launchGridOverlay()
         }
     }
 
     private fun toggleMockOverlay() {
         if (designerApplication.isMockOverlayOn) {
-            LaunchUtils.cancelMockOverlay(this)
+            cancelMockOverlay()
         } else {
-            LaunchUtils.launchMockOverlay(this)
+            launchMockOverlay()
         }
     }
 
     private fun toggleColorPickerOverlay() {
         if (designerApplication.isColorPickerOn) {
-            LaunchUtils.cancelColorPickerOverlay(this)
+            cancelColorPickerOverlay()
         } else {
-            LaunchUtils.launchColorPickerOverlay(this)
+            launchColorPickerOverlay()
         }
     }
 

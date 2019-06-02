@@ -5,34 +5,33 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.widget.ImageView
-import com.digitex.designertools.utils.MockupUtils
-import com.digitex.designertools.utils.PreferenceUtils
+import com.digitex.designertools.utils.Preferences
+import com.digitex.designertools.utils.getLandscapeMockup
+import com.digitex.designertools.utils.getPortraitMockup
 
 internal class MockOverlayView(context: Context) : ImageView(context) {
 
     private val preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-        if (PreferenceUtils.MockPreferences.KEY_MOCKUP_OVERLAY_PORTRAIT == key || PreferenceUtils.MockPreferences.KEY_MOCKUP_OVERLAY_LANDSCAPE == key) {
+        if (Preferences.Mock.mockOverlayPortrait == key || Preferences.Mock.mockOverlayLandscape == key) {
             setImageBitmap(getBitmapForOrientation(resources.configuration.orientation))
             invalidate()
-        } else if (PreferenceUtils.MockPreferences.KEY_MOCK_OPACITY == key) {
-            imageAlpha = PreferenceUtils.MockPreferences.getMockOpacity(getContext(), 10)
+        } else if (Preferences.Mock.mockOpacity == key) {
+            imageAlpha = Preferences.Mock.getMockOpacity(10)
             invalidate()
         }
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        val prefs = PreferenceUtils.getShardedPreferences(context)
-        prefs.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
+        Preferences.prefs.registerOnSharedPreferenceChangeListener(preferenceChangeListener)
         setImageBitmap(getBitmapForOrientation(resources.configuration.orientation))
-        imageAlpha = PreferenceUtils.MockPreferences.getMockOpacity(context, 10)
+        imageAlpha = Preferences.Mock.getMockOpacity(10)
         invalidate()
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        val prefs = PreferenceUtils.getShardedPreferences(context)
-        prefs.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
+        Preferences.prefs.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -42,8 +41,8 @@ internal class MockOverlayView(context: Context) : ImageView(context) {
 
     private fun getBitmapForOrientation(orientation: Int): Bitmap? {
         return if (orientation == Configuration.ORIENTATION_PORTRAIT)
-            MockupUtils.getPortraitMockup(context)
+            getPortraitMockup()
         else
-            MockupUtils.getLandscapeMockup(context)
+            getLandscapeMockup()
     }
 }

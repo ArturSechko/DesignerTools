@@ -4,7 +4,8 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.digitex.designertools.R
 import com.digitex.designertools.designerApplication
-import com.digitex.designertools.utils.LaunchUtils
+import com.digitex.designertools.utils.cancelGridOverlay
+import com.digitex.designertools.utils.launchGridOverlay
 
 @RequiresApi(Build.VERSION_CODES.N)
 class GridOverlayTileService : TileServiceBase() {
@@ -16,9 +17,9 @@ class GridOverlayTileService : TileServiceBase() {
     override fun onClick() {
         super.onClick()
         if (tileIsOn) {
-            LaunchUtils.cancelGridOverlay(this)
+            cancelGridOverlay()
         } else {
-            LaunchUtils.launchGridOverlay(this)
+            launchGridOverlay()
         }
     }
 

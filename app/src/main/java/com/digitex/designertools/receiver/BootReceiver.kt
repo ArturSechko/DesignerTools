@@ -7,27 +7,27 @@ import com.digitex.designertools.qs.ColorPickerQuickSettingsTile
 import com.digitex.designertools.qs.GridQuickSettingsTile
 import com.digitex.designertools.qs.MockQuickSettingsTile
 import com.digitex.designertools.service.ScreenshotListenerService
-import com.digitex.designertools.utils.LaunchUtils
-import com.digitex.designertools.utils.PreferenceUtils
+import com.digitex.designertools.utils.Preferences
+import com.digitex.designertools.utils.isCyanogenMod
 
 class BootReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == Intent.ACTION_BOOT_COMPLETED) {
-            val isCm = LaunchUtils.isCyanogenMod(context)
-            if (PreferenceUtils.GridPreferences.getGridQsTileEnabled(context, false)) {
-                PreferenceUtils.GridPreferences.setGridOverlayActive(context, false)
-                if (isCm) GridQuickSettingsTile.publishGridTile(context)
+            val isCm = isCyanogenMod()
+            if (Preferences.Grid.getGridQsTileEnabled()) {
+                Preferences.Grid.setGridOverlayActive(false)
+                if (isCm) GridQuickSettingsTile.publishGridTile()
             }
-            if (PreferenceUtils.MockPreferences.getMockQsTileEnabled(context, false)) {
-                PreferenceUtils.MockPreferences.setMockOverlayActive(context, false)
-                if (isCm) MockQuickSettingsTile.publishMockTile(context)
+            if (Preferences.Mock.getMockQsTileEnabled()) {
+                Preferences.Mock.setMockOverlayActive(false)
+                if (isCm) MockQuickSettingsTile.publishMockTile()
             }
-            if (PreferenceUtils.ColorPickerPreferences.getColorPickerQsTileEnabled(context, false)) {
-                PreferenceUtils.ColorPickerPreferences.setColorPickerActive(context, false)
-                if (isCm) ColorPickerQuickSettingsTile.publishColorPickerTile(context)
+            if (Preferences.ColorPicker.getColorPickerQsTileEnabled()) {
+                Preferences.ColorPicker.setColorPickerActive(false)
+                if (isCm) ColorPickerQuickSettingsTile.publishColorPickerTile()
             }
-            if (PreferenceUtils.ScreenshotPreferences.getScreenshotInfoEnabled(context, false)) {
+            if (Preferences.Screenshot.getScreenshotInfoEnabled()) {
                 context.startService(Intent(context, ScreenshotListenerService::class.java))
             }
         }

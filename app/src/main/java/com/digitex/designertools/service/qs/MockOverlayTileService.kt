@@ -4,7 +4,9 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.digitex.designertools.R
 import com.digitex.designertools.designerApplication
-import com.digitex.designertools.utils.LaunchUtils
+import com.digitex.designertools.qs.OnOffTileState
+import com.digitex.designertools.utils.cancelMockOverlayOrUnpublishTile
+import com.digitex.designertools.utils.launchMockOverlayOrPublishTile
 
 @RequiresApi(Build.VERSION_CODES.N)
 class MockOverlayTileService : TileServiceBase() {
@@ -16,9 +18,9 @@ class MockOverlayTileService : TileServiceBase() {
     override fun onClick() {
         super.onClick()
         if (tileIsOn) {
-            LaunchUtils.cancelMockOverlayOrUnpublishTile(this)
+            cancelMockOverlayOrUnpublishTile()
         } else {
-            LaunchUtils.lauchMockPverlayOrPublishTile(this, 0)
+            launchMockOverlayOrPublishTile(OnOffTileState.STATE_OFF)
         }
     }
 
