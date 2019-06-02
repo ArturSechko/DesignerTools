@@ -6,6 +6,7 @@ import android.provider.Settings
 import android.view.View
 import android.widget.CompoundButton
 import com.digitex.designertools.R
+import com.digitex.designertools.designerApplication
 import com.digitex.designertools.qs.OnOffTileState
 import com.digitex.designertools.utils.LaunchUtils
 import com.digitex.designertools.utils.PreferenceUtils.ColorPickerPreferences
@@ -24,11 +25,11 @@ class ColorPickerCardFragment : DesignerToolCardFragment() {
 
     override fun onResume() {
         super.onResume()
-        enableSwitch.isChecked = applicationContext.isColorPickerOn
+        enableSwitch.isChecked = designerApplication.isColorPickerOn
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
-        if (isChecked == applicationContext.isColorPickerOn) return
+        if (isChecked == designerApplication.isColorPickerOn) return
         enableFeature(isChecked)
     }
 

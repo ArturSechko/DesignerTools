@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import com.digitex.designertools.R
+import com.digitex.designertools.designerApplication
 import com.digitex.designertools.ext.doOnProgressChanged
 import com.digitex.designertools.qs.OnOffTileState
 import com.digitex.designertools.utils.ImageUtils
@@ -26,7 +27,7 @@ class MockupOverlayCardFragment : DesignerToolCardFragment() {
 
     override fun onResume() {
         super.onResume()
-        enableSwitch.isChecked = applicationContext.isMockOverlayOn
+        enableSwitch.isChecked = designerApplication.isMockOverlayOn
     }
 
     override fun onCreateView(
@@ -76,7 +77,7 @@ class MockupOverlayCardFragment : DesignerToolCardFragment() {
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
-        if (isChecked == applicationContext.isMockOverlayOn) return
+        if (isChecked == designerApplication.isMockOverlayOn) return
         if (isChecked) {
             LaunchUtils.lauchMockPverlayOrPublishTile(
                     context,

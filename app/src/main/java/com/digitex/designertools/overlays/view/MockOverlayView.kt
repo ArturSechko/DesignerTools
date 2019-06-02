@@ -12,8 +12,7 @@ internal class MockOverlayView(context: Context) : ImageView(context) {
 
     private val preferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
         if (PreferenceUtils.MockPreferences.KEY_MOCKUP_OVERLAY_PORTRAIT == key || PreferenceUtils.MockPreferences.KEY_MOCKUP_OVERLAY_LANDSCAPE == key) {
-            setImageBitmap(getBitmapForOrientation(
-                    resources.configuration.orientation))
+            setImageBitmap(getBitmapForOrientation(resources.configuration.orientation))
             invalidate()
         } else if (PreferenceUtils.MockPreferences.KEY_MOCK_OPACITY == key) {
             imageAlpha = PreferenceUtils.MockPreferences.getMockOpacity(getContext(), 10)
@@ -41,7 +40,7 @@ internal class MockOverlayView(context: Context) : ImageView(context) {
         setImageBitmap(getBitmapForOrientation(resources.configuration.orientation))
     }
 
-    private fun getBitmapForOrientation(orientation: Int): Bitmap {
+    private fun getBitmapForOrientation(orientation: Int): Bitmap? {
         return if (orientation == Configuration.ORIENTATION_PORTRAIT)
             MockupUtils.getPortraitMockup(context)
         else

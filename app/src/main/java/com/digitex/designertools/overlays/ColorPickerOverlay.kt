@@ -20,7 +20,10 @@ import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.os.Handler
 import android.os.IBinder
-import android.view.*
+import android.view.Gravity
+import android.view.MotionEvent
+import android.view.View
+import android.view.WindowManager
 import androidx.core.animation.addListener
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -42,11 +45,11 @@ import com.digitex.designertools.widget.MagnifierView
 @SuppressLint("ClickableViewAccessibility")
 class ColorPickerOverlay : Service() {
 
-    private val windowManager: WindowManager = getSystemService()!!
+    private lateinit var windowManager: WindowManager
     private lateinit var params: WindowManager.LayoutParams
     private lateinit var magnifierParams: WindowManager.LayoutParams
 
-    private val mediaProjectionManager: MediaProjectionManager = getSystemService()!!
+    private lateinit var mediaProjectionManager: MediaProjectionManager
     private lateinit var mediaProjection: MediaProjection
     private lateinit var virtualDisplay: VirtualDisplay
     private lateinit var imageReader: ImageReader
@@ -174,6 +177,8 @@ class ColorPickerOverlay : Service() {
     }
 
     private fun setup() {
+        windowManager = getSystemService()!!
+        mediaProjectionManager = getSystemService()!!
         setupMediaProjection()
 
         currentOrientation = resources.configuration.orientation

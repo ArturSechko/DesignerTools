@@ -26,7 +26,7 @@ import com.digitex.designertools.utils.NotificationUtils
 
 class MockOverlay : Service() {
 
-    private val windowManager: WindowManager = getSystemService()!!
+    private lateinit var windowManager: WindowManager
     private lateinit var overlayView: MockOverlayView
     private lateinit var params: WindowManager.LayoutParams
 
@@ -66,6 +66,7 @@ class MockOverlay : Service() {
     }
 
     private fun setup() {
+        windowManager = getSystemService()!!
         val size = Point()
         windowManager.defaultDisplay.getRealSize(size)
         params = WindowManager.LayoutParams(

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.SeekBar
 import com.digitex.designertools.R
+import com.digitex.designertools.designerApplication
 import com.digitex.designertools.ext.setOnSeekBarChangeListener
 import com.digitex.designertools.qs.OnOffTileState
 import com.digitex.designertools.utils.ColorUtils
@@ -94,7 +95,7 @@ class GridOverlayCardFragment : DesignerToolCardFragment(), SharedPreferences.On
         super.onResume()
         PreferenceUtils.getShardedPreferences(context)
                 .registerOnSharedPreferenceChangeListener(this)
-        enableSwitch.isChecked = applicationContext.isGridOverlayOn
+        enableSwitch.isChecked = designerApplication.isGridOverlayOn
     }
 
     override fun onPause() {
@@ -104,7 +105,7 @@ class GridOverlayCardFragment : DesignerToolCardFragment(), SharedPreferences.On
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
-        if (isChecked == applicationContext.isGridOverlayOn) return
+        if (isChecked == designerApplication.isGridOverlayOn) return
         if (isChecked) {
             LaunchUtils.lauchGridOverlayOrPublishTile(
                     context,

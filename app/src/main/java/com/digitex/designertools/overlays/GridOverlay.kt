@@ -26,7 +26,7 @@ import com.digitex.designertools.utils.NotificationUtils
 
 class GridOverlay : Service() {
 
-    private val windowManager: WindowManager = getSystemService()!!
+    private lateinit var windowManager: WindowManager
     private lateinit var overlayView: GridOverlayView
     private lateinit var params: WindowManager.LayoutParams
 
@@ -64,6 +64,7 @@ class GridOverlay : Service() {
     }
 
     private fun setup() {
+        windowManager = getSystemService()!!
         params = WindowManager.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT,
