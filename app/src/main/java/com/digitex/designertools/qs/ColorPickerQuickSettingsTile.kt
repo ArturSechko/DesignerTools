@@ -1,14 +1,10 @@
 package com.digitex.designertools.qs
 
-import android.app.Activity
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.digitex.designertools.DesignerToolsApplication
 import com.digitex.designertools.R
-import com.digitex.designertools.overlays.ColorPickerOverlay
-import com.digitex.designertools.ui.ScreenRecordRequestActivity
 import com.digitex.designertools.utils.LaunchUtils
 import com.digitex.designertools.utils.PreferenceUtils.ColorPickerPreferences
 import cyanogenmod.app.CMStatusBarManager
@@ -63,19 +59,6 @@ object ColorPickerQuickSettingsTile {
                     publishColorPickerTile(context, OnOffTileState.STATE_OFF)
                     ColorPickerPreferences.setColorPickerActive(context, false)
                 }
-            }
-        }
-
-        private fun startColorPickerOrRequestPermission(context: Context) {
-            val app = context.applicationContext as DesignerToolsApplication
-            if (app.screenRecordResultCode == Activity.RESULT_OK && app.screenRecordResultData != null) {
-                val newIntent = Intent(context, ColorPickerOverlay::class.java)
-                context.startService(newIntent)
-                ColorPickerPreferences.setColorPickerActive(context, true)
-            } else {
-                val intent = Intent(context, ScreenRecordRequestActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                context.startActivity(intent)
             }
         }
     }

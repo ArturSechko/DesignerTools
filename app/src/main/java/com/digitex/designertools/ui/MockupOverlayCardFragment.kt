@@ -26,7 +26,7 @@ class MockupOverlayCardFragment : DesignerToolCardFragment() {
 
     override fun onResume() {
         super.onResume()
-        enableSwitch.isChecked = applicationContext.mockOverlayOn
+        enableSwitch.isChecked = applicationContext.isMockOverlayOn
     }
 
     override fun onCreateView(
@@ -76,7 +76,7 @@ class MockupOverlayCardFragment : DesignerToolCardFragment() {
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
-        if (isChecked == applicationContext.mockOverlayOn) return
+        if (isChecked == applicationContext.isMockOverlayOn) return
         if (isChecked) {
             LaunchUtils.lauchMockPverlayOrPublishTile(
                     context,

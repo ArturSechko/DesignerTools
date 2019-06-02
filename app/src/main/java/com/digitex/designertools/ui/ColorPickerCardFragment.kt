@@ -24,11 +24,11 @@ class ColorPickerCardFragment : DesignerToolCardFragment() {
 
     override fun onResume() {
         super.onResume()
-        enableSwitch.isChecked = applicationContext.colorPickerOn
+        enableSwitch.isChecked = applicationContext.isColorPickerOn
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
-        if (isChecked == applicationContext.colorPickerOn) return
+        if (isChecked == applicationContext.isColorPickerOn) return
         enableFeature(isChecked)
     }
 

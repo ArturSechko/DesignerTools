@@ -94,7 +94,7 @@ class GridOverlayCardFragment : DesignerToolCardFragment(), SharedPreferences.On
         super.onResume()
         PreferenceUtils.getShardedPreferences(context)
                 .registerOnSharedPreferenceChangeListener(this)
-        enableSwitch.isChecked = applicationContext.gridOverlayOn
+        enableSwitch.isChecked = applicationContext.isGridOverlayOn
     }
 
     override fun onPause() {
@@ -104,7 +104,7 @@ class GridOverlayCardFragment : DesignerToolCardFragment(), SharedPreferences.On
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
-        if (isChecked == applicationContext.gridOverlayOn) return
+        if (isChecked == applicationContext.isGridOverlayOn) return
         if (isChecked) {
             LaunchUtils.lauchGridOverlayOrPublishTile(
                     context,

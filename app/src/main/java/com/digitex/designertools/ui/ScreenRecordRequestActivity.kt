@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.getSystemService
 
-import com.digitex.designertools.DesignerToolsApplication
+import com.digitex.designertools.designerApplication
 import com.digitex.designertools.overlays.ColorPickerOverlay
 import com.digitex.designertools.utils.PreferenceUtils.ColorPickerPreferences
 
@@ -19,7 +19,7 @@ class ScreenRecordRequestActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
-            (application as DesignerToolsApplication).setScreenRecordPermissionData(resultCode, data)
+            designerApplication.setScreenRecordPermissionData(resultCode, data)
             startService(Intent(this, ColorPickerOverlay::class.java))
             ColorPickerPreferences.setColorPickerActive(this, true)
         }

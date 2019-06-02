@@ -2,13 +2,10 @@ package com.digitex.designertools.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.digitex.designertools.DesignerToolsApplication
+import com.digitex.designertools.designerApplication
 import com.digitex.designertools.utils.LaunchUtils
 
 class AppShortcutsActivity : AppCompatActivity() {
-
-    private val designerToolsApplication: DesignerToolsApplication
-        get() = application as DesignerToolsApplication
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +18,7 @@ class AppShortcutsActivity : AppCompatActivity() {
     }
 
     private fun toggleGridOverlay() {
-        if (designerToolsApplication.gridOverlayOn) {
+        if (designerApplication.isGridOverlayOn) {
             LaunchUtils.cancelGridOverlay(this)
         } else {
             LaunchUtils.launchGridOverlay(this)
@@ -29,7 +26,7 @@ class AppShortcutsActivity : AppCompatActivity() {
     }
 
     private fun toggleMockOverlay() {
-        if (designerToolsApplication.mockOverlayOn) {
+        if (designerApplication.isMockOverlayOn) {
             LaunchUtils.cancelMockOverlay(this)
         } else {
             LaunchUtils.launchMockOverlay(this)
@@ -37,7 +34,7 @@ class AppShortcutsActivity : AppCompatActivity() {
     }
 
     private fun toggleColorPickerOverlay() {
-        if (designerToolsApplication.colorPickerOn) {
+        if (designerApplication.isColorPickerOn) {
             LaunchUtils.cancelColorPickerOverlay(this)
         } else {
             LaunchUtils.launchColorPickerOverlay(this)
