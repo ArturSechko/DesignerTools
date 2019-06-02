@@ -19,8 +19,6 @@ class MagnifierView @JvmOverloads constructor(
         defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private lateinit var colorValueTextView: TextView
-
     private val magnifyingLens: Drawable = context.getDrawable(R.drawable.loop_ring)!!
     private var pixels: Bitmap? = null
     private val bitmapPaint: Paint = Paint()
@@ -77,17 +75,15 @@ class MagnifierView @JvmOverloads constructor(
     override fun onFinishInflate() {
         super.onFinishInflate()
 
-        colorValueTextView = color_value
-        colorValueTextView.setOnClickListener {
-            val cm = context.getSystemService<ClipboardManager>()
-            val text = colorValueTextView.text
-            val primaryClip = cm?.primaryClip
-            if (primaryClip?.getItemAt(0) == null ||
-                    text != cm.primaryClip!!.getItemAt(0).coerceToText(context)) {
+        colorValue.setOnClickListener {
+            val cm = context.getSystemService<ClipboardManager>()!!
+            val text = colorValue.text
+            val primaryClip = cm.primaryClip
+            if (primaryClip?.getItemAt(0) == null
+                    || text != cm.primaryClip!!.getItemAt(0).coerceToText(context)) {
                 val clip = ClipData.newPlainText("color", text)
-                cm?.primaryClip = clip
-                Toast.makeText(context, R.string.color_copied_to_clipboard, Toast.LENGTH_SHORT)
-                        .show()
+                cm.primaryClip = clip
+                Toast.makeText(context, R.string.color_copied_to_clipboard, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -149,7 +145,7 @@ class MagnifierView @JvmOverloads constructor(
                 destinationPreviewRect.top.toFloat() + y + pixelSize
         )
 
-        colorValueTextView.text = String.format("#%06X", centerPixelColor and 0x00ffffff)
+        colorValue.text = String.format("#%06X", centerPixelColor and 0x00ffffff)
         invalidate()
     }
 }

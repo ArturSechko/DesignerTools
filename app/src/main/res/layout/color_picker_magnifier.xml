@@ -4,7 +4,7 @@
     android:layout_height="@dimen/picker_magnifying_ring_height">
 
     <TextView
-        android:id="@+id/color_value"
+        android:id="@+id/colorValue"
         android:layout_width="76dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

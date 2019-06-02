@@ -17,3 +17,11 @@ internal fun startOverlayActivity(overlayType: Int) {
         it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     })
 }
+
+fun lerp(from: Float, to: Float, progress: Float): Float {
+    return from + (to - from) * progress
+}
+
+fun lerp(from: Int, to: Int, progress: Float): Float {
+    return from + (to - from) * progress
+}

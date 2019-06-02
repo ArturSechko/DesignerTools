@@ -1,6 +1,5 @@
 package com.digitex.designertools.overlays
 
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationManager
@@ -24,21 +23,29 @@ import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
-import androidx.core.animation.addListener
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.getSystemService
 import androidx.core.graphics.createBitmap
 import androidx.core.view.doOnPreDraw
+import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.dynamicanimation.animation.SpringAnimation
+import androidx.dynamicanimation.animation.SpringForce
+import androidx.dynamicanimation.animation.springAnimationOf
+import androidx.dynamicanimation.animation.withSpringForceProperties
 import com.digitex.designertools.R
 import com.digitex.designertools.designerApplication
-import com.digitex.designertools.utils.isAtLeastSdk
+import com.digitex.designertools.ext.animate
+import com.digitex.designertools.ext.doOnEnd
+import com.digitex.designertools.ext.spring
+import com.digitex.designertools.ext.springValueAnimation
 import com.digitex.designertools.qs.ColorPickerQuickSettingsTile
 import com.digitex.designertools.qs.OnOffTileState
 import com.digitex.designertools.utils.createNotificationChannel
+import com.digitex.designertools.utils.isAtLeastSdk
+import com.digitex.designertools.utils.lerp
 import com.digitex.designertools.widget.MagnifierNodeView
 import com.digitex.designertools.widget.MagnifierView
 
@@ -71,13 +78,13 @@ class ColorPickerOverlay : Service() {
 
     private val screenCaptureLock = Any()
 
-    private var animating = false
+    private var magnifierIsAnimating = false
 
     private val imageAvailableListener = ImageReader.OnImageAvailableListener { reader ->
         synchronized(screenCaptureLock) {
             val newImage = reader.acquireNextImage()
             if (newImage != null) {
-                if (!animating) {
+                if (!magnifierIsAnimating) {
                     magnifierView.setPixels(getScreenBitmapRegion(newImage, previewArea))
                 }
                 newImage.close()
@@ -274,9 +281,7 @@ class ColorPickerOverlay : Service() {
     }
 
     private fun animateColorPickerIn() {
-        magnifierView.scaleX = 0f
-        magnifierView.scaleY = 0f
-        magnifierNodeView.visibility = View.GONE
+        magnifierNodeView.isInvisible = true
 
         val startX = magnifierParams.x + (magnifierParams.width - params.width) / 2
         val startY = magnifierParams.y + (magnifierParams.height - params.height) / 2
@@ -285,30 +290,24 @@ class ColorPickerOverlay : Service() {
         params.x = startX
         params.y = startY
         windowManager.updateViewLayout(magnifierNodeView, params)
-        ValueAnimator.ofFloat(0f, 1f).apply {
-            duration = 200
-            interpolator = FastOutSlowInInterpolator()
-            addUpdateListener { animator ->
-                val fraction = animator.animatedFraction
-                params.x = startX + (fraction * (endX - startX)).toInt()
-                params.y = startY + (fraction * (endY - startY)).toInt()
-                windowManager.updateViewLayout(magnifierNodeView, params)
-            }
-            addListener(
-                    onStart = {
-                        animating = true
-                        magnifierNodeView.visibility = View.VISIBLE
-                    },
-                    onEnd = {
-                        animating = false
-                    }
-            )
 
-            magnifierView.animate()
-                    .scaleX(1f)
-                    .scaleY(1f)
-                    .setInterpolator(FastOutSlowInInterpolator())
-                    .withEndAction { start() }
+        val magnifierNodeAnim = springValueAnimation { animation ->
+            params.x = lerp(startX, endX, animation).toInt()
+            params.y = lerp(startY, endY, animation).toInt()
+            windowManager.updateViewLayout(magnifierNodeView, params)
+        }.doOnEnd { _, _, _, _ ->
+            magnifierIsAnimating = false
+        }.withSpringForceProperties {
+            dampingRatio = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
+        }
+
+        magnifierView.apply {
+            magnifierIsAnimating = true
+            spring(SpringAnimation.SCALE_Y).animate(0f, 1f)
+            spring(SpringAnimation.SCALE_X).doOnEnd { _, _, _, _ ->
+                magnifierNodeView.isVisible = true
+                magnifierNodeAnim.start()
+            }.animate(0f, 1f)
         }
     }
 
@@ -318,36 +317,25 @@ class ColorPickerOverlay : Service() {
         val startX = params.x
         val startY = params.y
         windowManager.updateViewLayout(magnifierNodeView, params)
-        ValueAnimator.ofFloat(0f, 1f).apply {
-            duration = 200
-            interpolator = FastOutSlowInInterpolator()
-            addUpdateListener { animator ->
-                val fraction = animator.animatedFraction
-                params.x = startX + (fraction * (endX - startX)).toInt()
-                params.y = startY + (fraction * (endY - startY)).toInt()
-                windowManager.updateViewLayout(magnifierNodeView, params)
+
+        springValueAnimation { animation ->
+            params.x = lerp(startX, endX, animation).toInt()
+            params.y = lerp(startY, endY, animation).toInt()
+            windowManager.updateViewLayout(magnifierNodeView, params)
+        }.doOnEnd { _, _, _, _ ->
+            magnifierIsAnimating = false
+            magnifierNodeView.isGone = true
+            params.x = startX
+            params.y = startY
+            magnifierView.apply {
+                spring(SpringAnimation.SCALE_Y).animateToFinalPosition(0f)
+                spring(SpringAnimation.SCALE_X).doOnEnd { _, _, _, _ ->
+                    endAction.invoke()
+                }.animateToFinalPosition(0f)
             }
-            addListener(
-                    onStart = {
-                        animating = true
-                        magnifierNodeView.visibility = View.VISIBLE
-                    },
-                    onEnd = {
-                        animating = false
-                        magnifierNodeView.visibility = View.GONE
-                        params.x = startX
-                        params.y = startY
-                        magnifierView.animate()
-                                .scaleX(0f)
-                                .scaleY(0f)
-                                .setInterpolator(FastOutSlowInInterpolator())
-                                .withEndAction {
-                                    endAction.invoke()
-                                }
-                    }
-            )
-            start()
-        }
+        }.start()
+        magnifierIsAnimating = true
+        magnifierNodeView.isVisible = true
     }
 
     private fun getScreenBitmapRegion(image: Image, region: Rect): Bitmap {
@@ -396,7 +384,7 @@ class ColorPickerOverlay : Service() {
         imageReader.setOnImageAvailableListener(imageAvailableListener, Handler())
         mediaProjection = mediaProjectionManager.getMediaProjection(
                 designerApplication.screenRecordResultCode,
-                designerApplication.screenRecordResultData!!
+                designerApplication.screenRecordResultData
         )
         virtualDisplay = mediaProjection.createVirtualDisplay(
                 ColorPickerOverlay::class.java.simpleName,
@@ -454,8 +442,8 @@ class ColorPickerOverlay : Service() {
         params.y = y - magnifierNodeView.height / 2
         windowManager.updateViewLayout(magnifierNodeView, params)
 
-        magnifierParams.x = (nodeToMagnifierDistance * Math.cos(angle.toDouble()).toFloat() + x).toInt() - magnifierView.width / 2
-        magnifierParams.y = (nodeToMagnifierDistance * Math.sin(angle.toDouble()).toFloat() + y).toInt() - magnifierView.height / 2
+        magnifierParams.x = (nodeToMagnifierDistance * Math.cos(angle.toDouble()) + x).toInt() - magnifierView.width / 2
+        magnifierParams.y = (nodeToMagnifierDistance * Math.sin(angle.toDouble()) + y).toInt() - magnifierView.height / 2
         windowManager.updateViewLayout(magnifierView, magnifierParams)
     }
 
