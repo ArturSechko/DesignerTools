@@ -1,10 +1,12 @@
 package com.digitex.designertools.ui
 
 import android.content.ContextWrapper
+import android.graphics.Outline
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewOutlineProvider
 import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import com.digitex.designertools.R
@@ -24,6 +26,13 @@ open class DesignerToolCardFragment : Fragment(), CompoundButton.OnCheckedChange
         context.setTheme(cardStyleResId)
         inflater.cloneInContext(context)
         return inflater.inflate(R.layout.card_layout, container, true).apply {
+            outlineProvider = object : ViewOutlineProvider() {
+                override fun getOutline(view: View, outline: Outline) {
+                    outline.setRoundRect(0, 0, width, height,
+                            context.resources.getDimensionPixelOffset(R.dimen.card_corner_radius).toFloat()
+                    )
+                }
+            }
             backgroundTintList = getContext().getColorStateList(backgroundTint)
             enableSwitch.setOnCheckedChangeListener(this@DesignerToolCardFragment)
         }

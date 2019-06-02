@@ -8,7 +8,6 @@
     android:clipToPadding="false"
     android:elevation="4dp"
     android:orientation="vertical"
-    android:outlineProvider="bounds"
     android:padding="24dp">
 
     <include layout="@layout/card_header" />

@@ -7,7 +7,6 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.getSystemService
 import com.digitex.designertools.R
@@ -108,24 +107,16 @@ class MagnifierView @JvmOverloads constructor(
     private fun drawGrid(canvas: Canvas) {
         val stepSize = destinationPreviewRect.width() / sourcePreviewRect.width().toFloat()
 
-        destinationPreviewRect.apply {
-            for (x in (left + stepSize.toInt())..right step stepSize.toInt()) {
-                canvas.drawLine(
-                        x.toFloat(),
-                        top.toFloat(),
-                        x.toFloat(),
-                        bottom.toFloat(),
-                        gridPaint
-                )
+        with(destinationPreviewRect) {
+            var x = left + stepSize
+            while (x <= right) {
+                canvas.drawLine(x, top.toFloat(), x, bottom.toFloat(), gridPaint)
+                x += stepSize
             }
-            for (y in (top + stepSize.toInt())..bottom step stepSize.toInt()) {
-                canvas.drawLine(
-                        left.toFloat(),
-                        y.toFloat(),
-                        right.toFloat(),
-                        y.toFloat(),
-                        gridPaint
-                )
+            var y = top + stepSize
+            while (y <= bottom) {
+                canvas.drawLine(left.toFloat(), y, right.toFloat(), y, gridPaint)
+                y += stepSize
             }
         }
     }
