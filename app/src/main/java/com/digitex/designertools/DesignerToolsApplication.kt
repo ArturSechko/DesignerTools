@@ -11,7 +11,7 @@ class DesignerToolsApplication : Application() {
 
     var screenRecordResultCode = Activity.RESULT_CANCELED
         private set
-    var screenRecordResultData: Intent? = null
+    var screenRecordResultData: Intent = Intent()
         private set
 
     var isGridOverlayOn: Boolean = false
@@ -27,7 +27,7 @@ class DesignerToolsApplication : Application() {
 
     fun setScreenRecordPermissionData(resultCode: Int, resultData: Intent?) {
         screenRecordResultCode = resultCode
-        screenRecordResultData = resultData
+        screenRecordResultData = resultData ?: Intent()
     }
 
     companion object {

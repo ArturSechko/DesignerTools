@@ -17,6 +17,4 @@
     <dimen name="magnified_image_horizontal_inset">11dp</dimen>
     <dimen name="magnified_image_size">152dp</dimen>
 
-    <dimen name="card_corner_radius">4dp</dimen>
-
 </resources>

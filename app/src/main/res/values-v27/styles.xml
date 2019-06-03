@@ -4,10 +4,10 @@
     <style name="Base.AppTheme" parent="Base.V27.AppTheme"/>
 
     <style name="Base.V27.AppTheme" parent="Base.V23.AppTheme">
-        <item name="android:navigationBarColor">#CCFFFFFF</item>
-        <item name="android:statusBarColor">#CCFFFFFF</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar">true</item>
+        <!--<item name="android:navigationBarColor">#CCFFFFFF</item>-->
+        <!--<item name="android:statusBarColor">#CCFFFFFF</item>-->
+        <!--<item name="android:windowLightStatusBar">true</item>-->
+        <!--<item name="android:windowLightNavigationBar">true</item>-->
     </style>
 
 </resources>

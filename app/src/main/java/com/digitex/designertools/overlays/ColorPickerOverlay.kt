@@ -17,6 +17,7 @@ import android.media.Image
 import android.media.ImageReader
 import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
+import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.view.Gravity
@@ -199,7 +200,7 @@ class ColorPickerOverlay : Service() {
         params = WindowManager.LayoutParams(
                 nodeViewSize,
                 nodeViewSize,
-                if (isAtLeastSdk(26))
+                if (isAtLeastSdk(Build.VERSION_CODES.O))
                     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
                 else
                     WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
@@ -212,7 +213,7 @@ class ColorPickerOverlay : Service() {
         magnifierParams = WindowManager.LayoutParams(
                 magnifierWidth,
                 magnifierHeight,
-                if (isAtLeastSdk(26))
+                if (isAtLeastSdk(Build.VERSION_CODES.O))
                     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
                 else
                     WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
