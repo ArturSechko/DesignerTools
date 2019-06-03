@@ -1,4 +1,4 @@
-package com.digitex.designertools.ui
+package com.digitex.designertools.ui.fragment
 
 import android.content.ContextWrapper
 import android.graphics.Outline

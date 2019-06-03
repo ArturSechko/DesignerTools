@@ -1,4 +1,4 @@
-package com.digitex.designertools.ui
+package com.digitex.designertools.ui.fragment
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -12,6 +12,7 @@ import com.digitex.designertools.R
 import com.digitex.designertools.designerApplication
 import com.digitex.designertools.ext.setOnSeekBarChangeListener
 import com.digitex.designertools.qs.OnOffTileState
+import com.digitex.designertools.ui.DualColorPickerDialog
 import com.digitex.designertools.utils.Preferences
 import com.digitex.designertools.utils.cancelGridOverlayOrUnpublishTile
 import com.digitex.designertools.utils.lauchGridOverlayOrPublishTile

@@ -1,4 +1,4 @@
-package com.digitex.designertools.ui
+package com.digitex.designertools.ui.fragment
 
 import android.app.Activity
 import android.content.Intent
