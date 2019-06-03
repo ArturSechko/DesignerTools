@@ -23,8 +23,10 @@ class DesignerToolsActivity : AppCompatActivity() {
 
         contentView.doOnApplyWindowInsets { view, insets, padding ->
             view.updatePadding(
-                    bottom = padding.bottom + insets.systemWindowInsetBottom,
-                    top = padding.top + insets.systemWindowInsetTop
+                    left = padding.left + insets.systemWindowInsetLeft,
+                    top = padding.top + insets.systemWindowInsetTop,
+                    right = padding.right + insets.systemWindowInsetRight,
+                    bottom = padding.bottom + insets.systemWindowInsetBottom
             )
         }
     }
