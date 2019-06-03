@@ -27,7 +27,7 @@
 
         <fragment
             android:id="@+id/grid_overlay_fragment"
-            android:name="com.digitex.designertools.ui.GridOverlayCardFragment"
+            android:name="com.digitex.designertools.ui.fragment.GridOverlayCardFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -51,7 +51,7 @@
 
         <fragment
             android:id="@+id/screenshot_fragment"
-            android:name="com.digitex.designertools.ui.ScreenshotCardFragment"
+            android:name="com.digitex.designertools.ui.fragment.ScreenshotCardFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -64,7 +64,7 @@
 
         <fragment
             android:id="@+id/mock_overlay_fragment"
-            android:name="com.digitex.designertools.ui.MockupOverlayCardFragment"
+            android:name="com.digitex.designertools.ui.fragment.MockupOverlayCardFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -76,7 +76,7 @@
 
         <fragment
             android:id="@+id/color_picker_fragment"
-            android:name="com.digitex.designertools.ui.ColorPickerCardFragment"
+            android:name="com.digitex.designertools.ui.fragment.ColorPickerCardFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
