@@ -6,8 +6,6 @@
     <style name="Base.AppTheme" parent="Base.V23.AppTheme" />
 
     <style name="Base.V23.AppTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
         <item name="minTouchTargetSize">0dp</item>
@@ -24,19 +22,35 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
-    <style name="AppTheme.GridOverlayCard">
+    <style name="AppTheme.Card">
+        <item name="cardElevation">4dp</item>
+        <item name="contentPadding">24dp</item>
+        <item name="colorOnPrimary">@color/textColorPrimary</item>
+        <item name="cardBackgroundColor">?attr/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="headerBottomMargin">0dp</item>
+    </style>
+
+    <style name="AppTheme.Card.Grid">
+        <item name="colorPrimary">@color/colorGridOverlayCardTint</item>
         <item name="colorSecondary">@color/colorGridOverlayAccent</item>
+        <item name="headerBottomMargin">20dp</item>
     </style>
 
-    <style name="AppTheme.MockupOverlayCard">
+    <style name="AppTheme.Card.Mockup">
+        <item name="colorPrimary">@color/colorMockupOverlayCardTint</item>
         <item name="colorSecondary">@color/colorMockupOverlayAccent</item>
+        <item name="headerBottomMargin">20dp</item>
     </style>
 
-    <style name="AppTheme.ColorPickerCard">
+    <style name="AppTheme.Card.ColorPicker">
+        <item name="colorPrimary">@color/colorColorPickerCardTint</item>
         <item name="colorSecondary">@color/colorColorPickerAccent</item>
     </style>
 
-    <style name="AppTheme.ScreenshotCard">
+    <style name="AppTheme.Card.Screenshot">
+        <item name="colorPrimary">@color/colorScreenshotCardTint</item>
         <item name="colorSecondary">@color/colorScreenshotAccent</item>
     </style>
 
@@ -67,5 +81,7 @@
         <attr name="primaryColor" format="reference|color" />
         <attr name="secondaryColor" format="reference|color" />
     </declare-styleable>
+
+    <attr name="headerBottomMargin" format="dimension|reference" />
 
 </resources>

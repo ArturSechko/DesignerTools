@@ -9,6 +9,7 @@ import android.view.View
 import androidx.annotation.Dimension
 import androidx.core.content.res.ResourcesCompat
 import com.digitex.designertools.R
+import com.digitex.designertools.utils.isAtLeastSdk
 
 class GridPreview @JvmOverloads constructor(
         context: Context,
@@ -52,7 +53,10 @@ class GridPreview @JvmOverloads constructor(
 
         gridSizeTextPaint.textSize = resources.getDimensionPixelSize(R.dimen.grid_preview_text_size).toFloat()
         gridSizeTextPaint.color = BACKGROUND_COLOR
-        gridSizeTextPaint.typeface = ResourcesCompat.getFont(context, R.font.product_sans)
+        gridSizeTextPaint.typeface = if (isInEditMode && isAtLeastSdk(26))
+            resources.getFont(R.font.product_sans)
+        else
+            ResourcesCompat.getFont(context, R.font.product_sans)
     }
 
     override fun onDraw(canvas: Canvas) {

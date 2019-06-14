@@ -36,7 +36,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/qsTilesTextView"
-            tools:layout="@layout/include_grid_overlay" />
+            tools:layout="@layout/card_layout_grid" />
 
         <fragment
             android:id="@+id/mock_overlay_fragment"
@@ -47,7 +47,7 @@
             app:layout_constraintEnd_toEndOf="@id/grid_overlay_fragment"
             app:layout_constraintStart_toStartOf="@id/grid_overlay_fragment"
             app:layout_constraintTop_toBottomOf="@id/grid_overlay_fragment"
-            tools:layout="@layout/include_mockup_overlay" />
+            tools:layout="@layout/card_layout_mockup" />
 
         <fragment
             android:id="@+id/color_picker_fragment"
@@ -58,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="@id/grid_overlay_fragment"
             app:layout_constraintStart_toStartOf="@id/grid_overlay_fragment"
             app:layout_constraintTop_toBottomOf="@id/mock_overlay_fragment"
-            tools:layout="@layout/card_layout" />
+            tools:layout="@layout/card_layout_grid" />
 
         <TextView
             android:id="@+id/textView"
@@ -83,7 +83,7 @@
             app:layout_constraintEnd_toEndOf="@id/grid_overlay_fragment"
             app:layout_constraintStart_toStartOf="@id/grid_overlay_fragment"
             app:layout_constraintTop_toBottomOf="@id/textView"
-            tools:layout="@layout/card_layout" />
+            tools:layout="@layout/card_layout_grid" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

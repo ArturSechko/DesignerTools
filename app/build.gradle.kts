@@ -27,13 +27,13 @@ android {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.31")
 
-    implementation("androidx.appcompat:appcompat:1.1.0-alpha05")
+    implementation("androidx.appcompat:appcompat:1.1.0-beta01")
     implementation("androidx.core:core-ktx:1.2.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     implementation("androidx.dynamicanimation:dynamicanimation:1.1.0-alpha01")
     implementation("androidx.dynamicanimation:dynamicanimation-ktx:1.0.0-alpha02")
-    implementation("androidx.fragment:fragment:1.1.0-alpha09")
-    implementation("androidx.fragment:fragment-ktx:1.1.0-alpha09")
+    implementation("androidx.fragment:fragment:1.1.0-beta01")
+    implementation("androidx.fragment:fragment-ktx:1.1.0-beta01")
     implementation("com.google.android.material:material:1.1.0-alpha07")
 
     implementation("org.cyanogenmod:platform.sdk:6.0")

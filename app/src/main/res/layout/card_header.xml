@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/cardIcon"
-        android:layout_width="@dimen/card_header_icon_size"
-        android:layout_height="@dimen/card_header_icon_size"
-        app:layout_constraintBottom_toBottomOf="@+id/cardTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cardTitle"
-        tools:src="@drawable/ic_qs_grid_on" />
+    android:layout_height="match_parent"
+    tools:showIn="@layout/card_layout_grid">
 
     <TextView
         android:id="@+id/cardTitle"
@@ -20,10 +12,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/header_title_grid_overlay"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/cardIcon"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/cardIcon"
+        android:layout_width="@dimen/card_header_icon_size"
+        android:layout_height="@dimen/card_header_icon_size"
+        android:tint="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/cardTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardTitle"
+        tools:src="@drawable/ic_qs_grid_on" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/enableSwitch"
@@ -45,4 +47,17 @@
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@+id/cardTitle" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Space
+        android:id="@+id/spacer"
+        android:layout_width="0dp"
+        android:layout_height="?attr/headerBottomMargin"
+        app:layout_constraintTop_toBottomOf="@id/cardSummary" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/header_end"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="spacer" />
+
+</merge>

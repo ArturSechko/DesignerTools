@@ -13,10 +13,7 @@ import com.digitex.designertools.utils.cancelColorPickerOrUnpublishTile
 import com.digitex.designertools.utils.launchColorPickerOrPublishTile
 import kotlinx.android.synthetic.main.card_header.*
 
-class ColorPickerCardFragment : DesignerToolCardFragment() {
-
-    override val cardStyleResId: Int get() = R.style.AppTheme_ColorPickerCard
-    override val backgroundTint: Int get() = R.color.colorColorPickerCardTint
+class ColorPickerCardFragment : DesignerToolCardFragment(R.layout.card_layout_colorpicker) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         cardTitle.setText(R.string.header_title_color_picker)

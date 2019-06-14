@@ -46,8 +46,15 @@ class DualColorPicker @JvmOverloads constructor(
 
     init {
         context.withStyledAttributes(attrs, R.styleable.DualColorPicker) {
-            val defPrimaryColor = Preferences.Grid.getGridLineColor()
-            val defSecondaryColor = Preferences.Grid.getKeylineColor()
+            val defPrimaryColor = if (isInEditMode)
+                context.getColor(R.color.colorPrimary)
+            else
+                Preferences.Grid.getGridLineColor()
+
+            val defSecondaryColor = if (isInEditMode)
+                context.getColor(R.color.colorAccent)
+            else
+                Preferences.Grid.getKeylineColor()
 
             val primaryColor = getColor(R.styleable.DualColorPicker_primaryColor, defPrimaryColor)
             val secondaryColor = getColor(R.styleable.DualColorPicker_secondaryColor, defSecondaryColor)

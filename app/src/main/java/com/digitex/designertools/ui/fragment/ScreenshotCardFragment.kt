@@ -11,10 +11,7 @@ import com.digitex.designertools.service.ScreenshotListenerService
 import com.digitex.designertools.utils.Preferences
 import kotlinx.android.synthetic.main.card_header.*
 
-class ScreenshotCardFragment : DesignerToolCardFragment() {
-
-    override val cardStyleResId: Int get() = R.style.AppTheme_ScreenshotCard
-    override val backgroundTint: Int get() = R.color.colorScreenshotCardTint
+class ScreenshotCardFragment : DesignerToolCardFragment(R.layout.card_layout_screenshot) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         cardTitle.setText(R.string.header_title_screenshot)

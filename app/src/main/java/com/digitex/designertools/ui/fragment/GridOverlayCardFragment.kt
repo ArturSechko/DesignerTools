@@ -2,10 +2,8 @@ package com.digitex.designertools.ui.fragment
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.SeekBar
 import com.digitex.designertools.R
@@ -17,13 +15,11 @@ import com.digitex.designertools.utils.Preferences
 import com.digitex.designertools.utils.cancelGridOverlayOrUnpublishTile
 import com.digitex.designertools.utils.lauchGridOverlayOrPublishTile
 import kotlinx.android.synthetic.main.card_header.*
-import kotlinx.android.synthetic.main.card_layout.view.*
-import kotlinx.android.synthetic.main.include_grid_overlay.*
+import kotlinx.android.synthetic.main.card_layout_grid.*
 
-class GridOverlayCardFragment : DesignerToolCardFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
-
-    override val cardStyleResId: Int get() = R.style.AppTheme_GridOverlayCard
-    override val backgroundTint: Int get() = R.color.colorGridOverlayCardTint
+class GridOverlayCardFragment
+    : DesignerToolCardFragment(R.layout.card_layout_grid),
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val seekBarChangeAction: (
             seekBar: SeekBar,
@@ -38,14 +34,6 @@ class GridOverlayCardFragment : DesignerToolCardFragment(), SharedPreferences.On
             gridPreview.rowSizeDp = size
             Preferences.Grid.setGridRowSize(size)
         }
-    }
-
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? = super.onCreateView(inflater, container, savedInstanceState)?.apply {
-        inflater.inflate(R.layout.include_grid_overlay, this.cardContent)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
